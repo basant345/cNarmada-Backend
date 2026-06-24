@@ -1,0 +1,650 @@
+[
+  {
+    "slug": "amroli",
+    "name": "Amroli",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "ashwin_at_haripura",
+    "name": "Ashwin at Haripura",
+    "lat": 22.045,
+    "lon": 73.716,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "awalighat",
+    "name": "Awalighat",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "bamnalla_khargone",
+    "name": "Bamnalla_Khargone",
+    "lat": 21.83,
+    "lon": 75.83,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "bamni",
+    "name": "Bamni",
+    "lat": 22.48,
+    "lon": 80.37,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "barginagar",
+    "name": "Barginagar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "barmanghat",
+    "name": "Barmanghat",
+    "lat": 23.03,
+    "lon": 79.01,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "barna_dam",
+    "name": "Barna Dam",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "barod",
+    "name": "Barod",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "barod_at_thikri",
+    "name": "Barod at Thikri",
+    "lat": 22.5,
+    "lon": 75.3,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "beda_at_satwada",
+    "name": "Beda at Satwada",
+    "lat": 21.98,
+    "lon": 75.7,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "belkhedi",
+    "name": "Belkhedi",
+    "lat": 22.92,
+    "lon": 79.33,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "belkund_at_ghughara",
+    "name": "Belkund At Ghughara",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "bhadli",
+    "name": "Bhadli",
+    "lat": 21.82,
+    "lon": 75.61,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "bharuch",
+    "name": "Bharuch",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "bodeli",
+    "name": "Bodeli",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "chakrar_at_gadasarai",
+    "name": "Chakrar At Gadasarai",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "chhidgaon",
+    "name": "Chhidgaon",
+    "lat": 22.4,
+    "lon": 77.3,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "chhotaudepur",
+    "name": "Chhotaudepur",
+    "lat": 22.29,
+    "lon": 74.01,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "choral_at_barwah",
+    "name": "Choral At Barwah",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "datuni_at_dudwas",
+    "name": "Datuni At Dudwas",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "dhulsar",
+    "name": "Dhulsar",
+    "lat": 22.2,
+    "lon": 74.85,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "dindori",
+    "name": "Dindori",
+    "lat": 22.94,
+    "lon": 81.07,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "doganwa_khargone",
+    "name": "Doganwa_Khargone",
+    "lat": 22.0833,
+    "lon": 74.66,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "dudhi_at_panagar",
+    "name": "Dudhi At Panagar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "flow_cumec_dindori",
+    "name": "Flow Cumec Dindori",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "flow_cumecs_mandla",
+    "name": "Flow Cumecs Mandla",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "gadarwara",
+    "name": "Gadarwara",
+    "lat": 22.92,
+    "lon": 78.79,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "gaur_at_balawada",
+    "name": "Gaur At Balawada",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "halo_at_bartola",
+    "name": "Halo At Bartola",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "handia",
+    "name": "Handia",
+    "lat": 22.49,
+    "lon": 76.99,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "haripura",
+    "name": "Haripura",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "heran_at_wasna",
+    "name": "Heran at Wasna",
+    "lat": 22.1,
+    "lon": 73.72,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "hiran_at_singaldeep",
+    "name": "Hiran At Singaldeep",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "hoshangabad",
+    "name": "Hoshangabad",
+    "lat": 22.75,
+    "lon": 77.73,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "hoshangabad_1_01_1972",
+    "name": "Hoshangabad 1 01 1972",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "indirasagar_dam",
+    "name": "Indirasagar Dam",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "jamner_at_sandalpur",
+    "name": "Jamner At Sandalpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "kaner_at_medhikheda",
+    "name": "Kaner At Medhikheda",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "kaner_at_mendhikheda",
+    "name": "Kaner At Mendhikheda",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "karam_at_dahiwar",
+    "name": "Karam At Dahiwar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "khoria",
+    "name": "Khoria",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "kogaon",
+    "name": "Kogaon",
+    "lat": 22.1,
+    "lon": 75.68,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "kolar_at_mahgaon",
+    "name": "Kolar At Mahgaon",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "kolar_dam_at_veerpur",
+    "name": "Kolar Dam At Veerpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "kukshi",
+    "name": "Kukshi",
+    "lat": 22.22,
+    "lon": 74.78,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "maan_at_gopalpura",
+    "name": "Maan At Gopalpura",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "machna_at_shahpur",
+    "name": "Machna At Shahpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "machrar_at_gidha",
+    "name": "Machrar At Gidha",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "mandla",
+    "name": "Mandla",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "mandleshwar",
+    "name": "Mandleshwar",
+    "lat": 22.17,
+    "lon": 75.66,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "mandleshwar_streamflow",
+    "name": "Mandleshwar Streamflow",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "manot",
+    "name": "Manot",
+    "lat": 22.73,
+    "lon": 80.51,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "matiyari_at_katangitola",
+    "name": "Matiyari At Katangitola",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "men_at_amroli",
+    "name": "Men at Amroli",
+    "lat": 22.01,
+    "lon": 73.75,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "mohgaon",
+    "name": "Mohgaon",
+    "lat": 22.76,
+    "lon": 80.62,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "mohgoan",
+    "name": "Mohgoan",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "mortakka",
+    "name": "Mortakka",
+    "lat": 22.22,
+    "lon": 76.04,
+    "has_streamflow": true,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "narmada_at_gorakhpur",
+    "name": "Narmada At Gorakhpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "narmada_at_maalpur",
+    "name": "Narmada At Maalpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "narmada_at_nasirabad",
+    "name": "Narmada At Nasirabad",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "orsang_at_bodeli",
+    "name": "Orsang at Bodeli",
+    "lat": 22.265,
+    "lon": 73.72,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "palakmati_at_sohagpur",
+    "name": "Palakmati At Sohagpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "pariyat_at_matamar",
+    "name": "Pariyat At Matamar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "patan",
+    "name": "Patan",
+    "lat": 23.31,
+    "lon": 79.66,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "patan_streamfllow",
+    "name": "Patan Streamfllow",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "pati",
+    "name": "Pati",
+    "lat": 21.94,
+    "lon": 74.74,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "phen_at_parsatola",
+    "name": "Phen At Parsatola",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "sandia",
+    "name": "Sandia",
+    "lat": 22.91,
+    "lon": 78.34,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "saner_at_chargaon",
+    "name": "Saner At Chargaon",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "sardar_sarovar_dam",
+    "name": "Sardar Sarovar Dam",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "shakkar",
+    "name": "Shakkar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "silgi_at_kotrai",
+    "name": "Silgi At Kotrai",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "sip_at_dholpur",
+    "name": "Sip At Dholpur",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "tawa_at_tawakathi",
+    "name": "Tawa At Tawakathi",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "tenuni_at_maheshwar",
+    "name": "Tenuni At Maheshwar",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "thava",
+    "name": "Thava",
+    "lat": 21.58,
+    "lon": 73.46,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "thava_ln",
+    "name": "Thava Ln",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "umar_at_imaliya",
+    "name": "Umar At Imaliya",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": false,
+    "has_waterlevel": true
+  },
+  {
+    "slug": "unch_at_khoria",
+    "name": "Unch at Khoria",
+    "lat": 22.18,
+    "lon": 73.74,
+    "has_streamflow": false,
+    "has_waterlevel": false
+  },
+  {
+    "slug": "wasna",
+    "name": "Wasna",
+    "lat": null,
+    "lon": null,
+    "has_streamflow": true,
+    "has_waterlevel": false
+  }
+]

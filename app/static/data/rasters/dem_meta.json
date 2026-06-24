@@ -1,0 +1,11 @@
+{
+  "bounds": {
+    "west": 72.5323544,
+    "south": 21.3832055,
+    "east": 81.7717067602261,
+    "north": 23.78035983567294
+  },
+  "min_elev": 11.0,
+  "max_elev": 927.0,
+  "file": "rasters/dem.png"
+}
