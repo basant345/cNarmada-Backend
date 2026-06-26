@@ -7,7 +7,7 @@ Routes:
 
 OTP storage: SQLite (auth.db alongside visits.db).
 OTP expiry:  8 minutes.
-Email:       Gmail SMTP via environment variables.
+Email:       Resend HTTP API (works on Render free tier).
 Token:       HMAC-SHA256 signed, 24-hour TTL, stored in auth.db for server-side invalidation.
 """
 
@@ -15,13 +15,13 @@ import os
 import re
 import hmac
 import uuid
+import json
 import random
 import hashlib
 import sqlite3
-import smtplib
+import urllib.request
+import urllib.error
 from datetime import datetime, timedelta
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 from flask import Blueprint, jsonify, request
 
@@ -31,11 +31,8 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 _DB_PATH = os.path.join(os.path.dirname(__file__), "auth.db")
 
 # ── Config from environment (set in .env / Render env vars) ───────────────
-SMTP_EMAIL    = os.environ.get("SMTP_EMAIL",    "cnarmadass@gmail.com")
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")          # Gmail App Password
-SMTP_HOST     = os.environ.get("SMTP_HOST",     "smtp.gmail.com")
-SMTP_PORT     = int(os.environ.get("SMTP_PORT", "587"))
-SECRET_KEY    = os.environ.get("AUTH_SECRET_KEY", "cnarmada-secret-change-in-prod-2025")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+SECRET_KEY     = os.environ.get("AUTH_SECRET_KEY", "cnarmada-secret-change-in-prod-2025")
 
 OTP_EXPIRY_MINUTES = 8
 TOKEN_EXPIRY_HOURS = 24
@@ -96,9 +93,11 @@ def _verify_token_signature(token: str) -> bool:
 
 # ── Email helper ───────────────────────────────────────────────────────────
 def _send_otp_email(to_email: str, name: str, otp: str):
-    """Send the OTP via Gmail SMTP (TLS). Raises on failure."""
+    """Send OTP via Resend HTTP API (works on Render free tier)."""
     display_name = name.strip() if name else "Researcher"
-    subject = "Your cNARMADA Data Access OTP"
+
+    if not RESEND_API_KEY:
+        raise Exception("RESEND_API_KEY not configured")
 
     html_body = f"""
 <!DOCTYPE html>
@@ -170,17 +169,30 @@ def _send_otp_email(to_email: str, name: str, otp: str):
 </html>
 """
 
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = subject
-    msg["From"]    = f"cNARMADA IIT Indore <{SMTP_EMAIL}>"
-    msg["To"]      = to_email
-    msg.attach(MIMEText(html_body, "html"))
+    payload = json.dumps({
+        "from": "cNARMADA IIT Indore <onboarding@resend.dev>",
+        "to": [to_email],
+        "subject": "Your cNARMADA Data Access OTP",
+        "html": html_body,
+    }).encode("utf-8")
 
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as server:
-        server.ehlo()
-        server.starttls()
-        server.login(SMTP_EMAIL, SMTP_PASSWORD)
-        server.sendmail(SMTP_EMAIL, [to_email], msg.as_string())
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json",
+            "User-Agent": "cnarmada-backend/1.0",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            if resp.status not in (200, 201):
+                raise Exception(f"Resend API error: {resp.status}")
+    except urllib.error.HTTPError as e:
+        raise Exception(f"Resend API error: {e.code} {e.read().decode()}")
 
 
 # ── POST /api/auth/send-otp ───────────────────────────────────────────────
@@ -204,7 +216,7 @@ def send_otp():
     if len(name) < 2:
         return jsonify({"error": "Name must be at least 2 characters"}), 400
 
-    if not SMTP_PASSWORD:
+    if not RESEND_API_KEY:
         return jsonify({"error": "Email service not configured. Contact the administrator."}), 503
 
     conn = _get_conn()
