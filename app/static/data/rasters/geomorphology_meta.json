@@ -1,0 +1,311 @@
+{
+  "file": "rasters/geomorphology.png",
+  "bounds": {
+    "west": 72.80640095269418,
+    "south": 21.382224935007034,
+    "east": 81.7725184460695,
+    "north": 23.7809865316867
+  },
+  "classes": [
+    {
+      "name": "Abandoned Channel",
+      "color": "rgb(191,86,86)"
+    },
+    {
+      "name": "Abandoned Quarry",
+      "color": "rgb(242,86,72)"
+    },
+    {
+      "name": "Active Quarry",
+      "color": "rgb(191,54,28)"
+    },
+    {
+      "name": "Badland",
+      "color": "rgb(242,140,109)"
+    },
+    {
+      "name": "Bench",
+      "color": "rgb(191,100,57)"
+    },
+    {
+      "name": "Braid Bar",
+      "color": "rgb(242,118,36)"
+    },
+    {
+      "name": "Butte",
+      "color": "rgb(191,136,86)"
+    },
+    {
+      "name": "Channel Bar",
+      "color": "rgb(242,167,72)"
+    },
+    {
+      "name": "Channel Island",
+      "color": "rgb(191,132,28)"
+    },
+    {
+      "name": "Colluvial Fan",
+      "color": "rgb(242,204,109)"
+    },
+    {
+      "name": "Cuesta",
+      "color": "rgb(191,164,57)"
+    },
+    {
+      "name": "Cut-off Meander",
+      "color": "rgb(242,217,36)"
+    },
+    {
+      "name": "Dam and Reservoir",
+      "color": "rgb(191,187,86)"
+    },
+    {
+      "name": "DenOri - Highly Dissected Hills and Valleys",
+      "color": "rgb(235,242,72)"
+    },
+    {
+      "name": "DenOri - Highly Dissected Lower Plateau",
+      "color": "rgb(171,191,28)"
+    },
+    {
+      "name": "DenOri - Low Dissected Hills and Valleys",
+      "color": "rgb(215,242,109)"
+    },
+    {
+      "name": "DenOri - Moderately Dissected Hills and Valleys",
+      "color": "rgb(153,191,57)"
+    },
+    {
+      "name": "DenOri - Moderately Dissected Lower Plateau",
+      "color": "rgb(168,242,36)"
+    },
+    {
+      "name": "DenOri - Moderately Dissected Upper Plateau",
+      "color": "rgb(144,191,86)"
+    },
+    {
+      "name": "DenOri - Pediment-Pediplain Complex",
+      "color": "rgb(154,242,72)"
+    },
+    {
+      "name": "DenOri - Piedmont Slope",
+      "color": "rgb(93,191,28)"
+    },
+    {
+      "name": "Dome",
+      "color": "rgb(151,242,109)"
+    },
+    {
+      "name": "Dyke / Sill Ridge",
+      "color": "rgb(89,191,57)"
+    },
+    {
+      "name": "FluOri - Active Flood plain",
+      "color": "rgb(69,242,36)"
+    },
+    {
+      "name": "FluOri - Older Alluvial Plain",
+      "color": "rgb(94,191,86)"
+    },
+    {
+      "name": "FluOri - Older Flood plain",
+      "color": "rgb(72,242,72)"
+    },
+    {
+      "name": "FluOri - Younger Alluvial plain",
+      "color": "rgb(28,191,41)"
+    },
+    {
+      "name": "Gorge",
+      "color": "rgb(109,242,130)"
+    },
+    {
+      "name": "Gullied Land",
+      "color": "rgb(57,191,89)"
+    },
+    {
+      "name": "Gullied Tract",
+      "color": "rgb(36,242,102)"
+    },
+    {
+      "name": "Hill",
+      "color": "rgb(86,191,128)"
+    },
+    {
+      "name": "Hogback",
+      "color": "rgb(72,242,154)"
+    },
+    {
+      "name": "Homocline",
+      "color": "rgb(28,191,119)"
+    },
+    {
+      "name": "Inselberg",
+      "color": "rgb(109,242,194)"
+    },
+    {
+      "name": "Intermontane Valley",
+      "color": "rgb(57,191,153)"
+    },
+    {
+      "name": "Lateral Bar",
+      "color": "rgb(36,242,201)"
+    },
+    {
+      "name": "Meander Scar",
+      "color": "rgb(86,191,178)"
+    },
+    {
+      "name": "Meander scar",
+      "color": "rgb(72,242,235)"
+    },
+    {
+      "name": "Mesa",
+      "color": "rgb(28,184,191)"
+    },
+    {
+      "name": "Mine Dump",
+      "color": "rgb(109,226,242)"
+    },
+    {
+      "name": "Mud Flat",
+      "color": "rgb(57,164,191)"
+    },
+    {
+      "name": "Natural Levee",
+      "color": "rgb(36,184,242)"
+    },
+    {
+      "name": "Palaeochannel",
+      "color": "rgb(86,153,191)"
+    },
+    {
+      "name": "Palaeolevee",
+      "color": "rgb(72,167,242)"
+    },
+    {
+      "name": "Pediment",
+      "color": "rgb(28,106,191)"
+    },
+    {
+      "name": "Pediment-Corestone-Tor Composite",
+      "color": "rgb(109,162,242)"
+    },
+    {
+      "name": "Pediplain",
+      "color": "rgb(57,100,191)"
+    },
+    {
+      "name": "Plain (Lateritic)",
+      "color": "rgb(36,85,242)"
+    },
+    {
+      "name": "Plateau Remnant",
+      "color": "rgb(86,102,191)"
+    },
+    {
+      "name": "Plateau Top",
+      "color": "rgb(72,86,242)"
+    },
+    {
+      "name": "Point Bar",
+      "color": "rgb(28,28,191)"
+    },
+    {
+      "name": "Residual Capping",
+      "color": "rgb(119,109,242)"
+    },
+    {
+      "name": "Residual Hill",
+      "color": "rgb(78,57,191)"
+    },
+    {
+      "name": "Residual Mound",
+      "color": "rgb(85,36,242)"
+    },
+    {
+      "name": "Ridge",
+      "color": "rgb(119,86,191)"
+    },
+    {
+      "name": "Rolling Plain",
+      "color": "rgb(140,72,242)"
+    },
+    {
+      "name": "Scarp",
+      "color": "rgb(106,28,191)"
+    },
+    {
+      "name": "StrOri - Highly Dissected Hills and Valleys",
+      "color": "rgb(183,109,242)"
+    },
+    {
+      "name": "StrOri - Highly Dissected Lower Plateau",
+      "color": "rgb(143,57,191)"
+    },
+    {
+      "name": "StrOri - Highly Dissected Upper Plateau",
+      "color": "rgb(184,36,242)"
+    },
+    {
+      "name": "StrOri - Low Dissected Hills and Valleys",
+      "color": "rgb(170,86,191)"
+    },
+    {
+      "name": "StrOri - Low Dissected Lower Plateau",
+      "color": "rgb(221,72,242)"
+    },
+    {
+      "name": "StrOri - Low Dissected Upper Plateau",
+      "color": "rgb(184,28,191)"
+    },
+    {
+      "name": "StrOri - Moderately Dissected Hills and Valleys",
+      "color": "rgb(242,109,236)"
+    },
+    {
+      "name": "StrOri - Moderately Dissected Lower Plateau",
+      "color": "rgb(191,57,175)"
+    },
+    {
+      "name": "StrOri - Moderately Dissected Upper Plateau",
+      "color": "rgb(242,36,201)"
+    },
+    {
+      "name": "Strike Ridge",
+      "color": "rgb(191,86,161)"
+    },
+    {
+      "name": "Tor",
+      "color": "rgb(242,72,181)"
+    },
+    {
+      "name": "Upland (Lateritic)",
+      "color": "rgb(191,28,119)"
+    },
+    {
+      "name": "Valley",
+      "color": "rgb(242,109,172)"
+    },
+    {
+      "name": "Valley Fill",
+      "color": "rgb(191,57,110)"
+    },
+    {
+      "name": "WatBod - Lake",
+      "color": "rgb(242,36,102)"
+    },
+    {
+      "name": "WatBod - Others",
+      "color": "rgb(191,86,111)"
+    },
+    {
+      "name": "WatBod - Pond",
+      "color": "rgb(242,72,99)"
+    },
+    {
+      "name": "WatBod - River",
+      "color": "rgb(191,28,41)"
+    }
+  ]
+}

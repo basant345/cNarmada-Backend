@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "unit": "mm",
+    "stops": [
+      [
+        0.0,
+        [
+          247,
+          251,
+          255
+        ]
+      ],
+      [
+        0.25,
+        [
+          198,
+          219,
+          239
+        ]
+      ],
+      [
+        0.5,
+        [
+          107,
+          174,
+          214
+        ]
+      ],
+      [
+        0.75,
+        [
+          33,
+          113,
+          181
+        ]
+      ],
+      [
+        1.0,
+        [
+          8,
+          48,
+          107
+        ]
+      ]
+    ]
+  },
+  "2015": {
+    "file": "rasters/precipitation_2015.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 531.45,
+    "max": 1445.42
+  },
+  "2016": {
+    "file": "rasters/precipitation_2016.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 659.94,
+    "max": 2171.17
+  },
+  "2017": {
+    "file": "rasters/precipitation_2017.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 644.51,
+    "max": 1367.92
+  },
+  "2018": {
+    "file": "rasters/precipitation_2018.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 534.9,
+    "max": 1201.86
+  },
+  "2019": {
+    "file": "rasters/precipitation_2019.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 906.5,
+    "max": 2142.61
+  },
+  "2020": {
+    "file": "rasters/precipitation_2020.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 757.79,
+    "max": 1869.22
+  },
+  "2021": {
+    "file": "rasters/precipitation_2021.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 550.92,
+    "max": 1768.09
+  },
+  "2022": {
+    "file": "rasters/precipitation_2022.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 663.55,
+    "max": 2436.77
+  },
+  "2023": {
+    "file": "rasters/precipitation_2023.png",
+    "bounds": {
+      "west": 73.125,
+      "south": 21.375,
+      "east": 81.625,
+      "north": 23.625
+    },
+    "min": 760.7,
+    "max": 1836.7
+  }
+}

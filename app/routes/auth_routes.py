@@ -60,9 +60,49 @@ def _get_conn():
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             expires_at DATETIME NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS login_attempts (
+            id           INTEGER PRIMARY KEY AUTOINCREMENT,
+            email        TEXT NOT NULL,
+            name         TEXT,
+            status       TEXT NOT NULL,   -- 'Incomplete' | 'Success' | 'Failed'
+            created_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
+            completed_at DATETIME
+        );
     """)
     conn.commit()
     return conn
+
+
+def _log_attempt(conn, email, name, status):
+    """Record a new login attempt (called when an OTP is sent)."""
+    conn.execute(
+        "INSERT INTO login_attempts (email, name, status) VALUES (?,?,?)",
+        (email, name, status)
+    )
+    conn.commit()
+
+
+def _resolve_attempt(conn, email, status):
+    """Mark the most recent 'Incomplete' attempt for this email as
+    Success/Failed (called when the OTP is verified). Falls back to
+    inserting a fresh row if none is pending."""
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    row = conn.execute(
+        "SELECT id FROM login_attempts WHERE email=? AND status='Incomplete' "
+        "ORDER BY id DESC LIMIT 1",
+        (email,)
+    ).fetchone()
+    if row:
+        conn.execute(
+            "UPDATE login_attempts SET status=?, completed_at=? WHERE id=?",
+            (status, now, row["id"])
+        )
+    else:
+        conn.execute(
+            "INSERT INTO login_attempts (email, name, status, completed_at) VALUES (?,?,?,?)",
+            (email, "", status, now)
+        )
+    conn.commit()
 
 
 def _clean_expired(conn):
@@ -251,7 +291,19 @@ def send_otp():
     try:
         _send_otp_email(email, name, otp)
     except Exception as exc:
+        conn2 = _get_conn()
+        try:
+            _log_attempt(conn2, email, name, "Failed")
+        finally:
+            conn2.close()
         return jsonify({"error": f"Failed to send email: {str(exc)}"}), 502
+
+    # Login attempt begins here — resolved to Success/Failed in verify_otp()
+    conn2 = _get_conn()
+    try:
+        _log_attempt(conn2, email, name, "Incomplete")
+    finally:
+        conn2.close()
 
     return jsonify({
         "message": f"OTP sent to {email}. Valid for {OTP_EXPIRY_MINUTES} minutes.",
@@ -286,6 +338,7 @@ def verify_otp():
         ).fetchone()
 
         if not row:
+            _resolve_attempt(conn, email, "Failed")
             return jsonify({"error": "Invalid or expired OTP. Please request a new one."}), 401
 
         # Mark OTP as used
@@ -302,6 +355,7 @@ def verify_otp():
             "INSERT INTO auth_sessions (token, email, name, expires_at) VALUES (?,?,?,?)",
             (token, email, name, expires_at)
         )
+        _resolve_attempt(conn, email, "Success")
         conn.commit()
     finally:
         conn.close()

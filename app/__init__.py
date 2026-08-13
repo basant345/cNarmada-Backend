@@ -32,8 +32,9 @@ def create_app():
 
     app.config["DATA_DIR"] = os.path.join(app.static_folder, "data")
 
-    # Max upload size: 10 MB (for sewer outfall photos)
-    app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024
+    # Max upload size: 200 MB (covers admin-uploaded reports, spreadsheets,
+    # and DEM/raster files; still comfortably covers sewer outfall photos)
+    app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
 
     # ── Blueprints ─────────────────────────────────────────────────────────
     from app.routes.data_routes import data_bp
@@ -48,6 +49,14 @@ def create_app():
     # ── NEW: OTP Authentication ────────────────────────────────────────────
     from app.routes.auth_routes import auth_bp
     app.register_blueprint(auth_bp)
+
+    # ── NEW: Admin Panel (reuses OTP auth above — no parallel auth system) ──
+    from app.routes.admin_routes import admin_bp
+    app.register_blueprint(admin_bp)
+
+    # ── NEW: Admin Panel — structured dataset records (CRUD) ────────────────
+    from app.routes.admin_records_routes import admin_records_bp
+    app.register_blueprint(admin_records_bp)
 
     @app.route("/api/health")
     def health():

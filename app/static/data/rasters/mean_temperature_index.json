@@ -1,0 +1,146 @@
+{
+  "_meta": {
+    "unit": "\u00b0C",
+    "stops": [
+      [
+        0.0,
+        [
+          49,
+          54,
+          149
+        ]
+      ],
+      [
+        0.25,
+        [
+          145,
+          191,
+          219
+        ]
+      ],
+      [
+        0.5,
+        [
+          255,
+          255,
+          191
+        ]
+      ],
+      [
+        0.75,
+        [
+          252,
+          141,
+          89
+        ]
+      ],
+      [
+        1.0,
+        [
+          165,
+          0,
+          38
+        ]
+      ]
+    ]
+  },
+  "2015": {
+    "file": "rasters/mean_temperature_2015.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 25.07,
+    "max": 28.34
+  },
+  "2016": {
+    "file": "rasters/mean_temperature_2016.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 25.35,
+    "max": 28.2
+  },
+  "2017": {
+    "file": "rasters/mean_temperature_2017.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 25.33,
+    "max": 28.09
+  },
+  "2018": {
+    "file": "rasters/mean_temperature_2018.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 25.04,
+    "max": 28.3
+  },
+  "2019": {
+    "file": "rasters/mean_temperature_2019.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 25.03,
+    "max": 27.83
+  },
+  "2020": {
+    "file": "rasters/mean_temperature_2020.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 24.56,
+    "max": 27.85
+  },
+  "2021": {
+    "file": "rasters/mean_temperature_2021.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 24.67,
+    "max": 27.93
+  },
+  "2022": {
+    "file": "rasters/mean_temperature_2022.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 24.99,
+    "max": 27.99
+  },
+  "2023": {
+    "file": "rasters/mean_temperature_2023.png",
+    "bounds": {
+      "west": 72.0,
+      "south": 20.0,
+      "east": 82.0,
+      "north": 24.0
+    },
+    "min": 24.65,
+    "max": 27.96
+  }
+}
