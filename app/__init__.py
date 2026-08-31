@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request
 
 
 def create_app():
@@ -15,17 +15,32 @@ def create_app():
         pass  # python-dotenv not installed — env vars must be set externally
 
     # ── CORS ──────────────────────────────────────────────────────────────
+    # An explicit allowlist. "origins: *" together with supports_credentials
+    # is invalid per the CORS spec, and flask-cors works around it by echoing
+    # back whatever Origin it is sent — which means any site could call the
+    # API with a token it had obtained.
+    _origins = [
+        o.strip() for o in os.environ.get(
+            "CORS_ORIGINS",
+            "https://cnarmada.iiti.ac.in,https://water.iiti.ac.in,http://localhost:5173",
+        ).split(",") if o.strip()
+    ]
+
     try:
         from flask_cors import CORS
         CORS(
             app,
-            resources={r"/api/*": {"origins": "*"}, r"/static/*": {"origins": "*"}},
+            resources={r"/api/*": {"origins": _origins},
+                       r"/static/*": {"origins": _origins}},
             supports_credentials=True,
         )
     except ImportError:
         @app.after_request
         def _add_cors_headers(response):
-            response.headers["Access-Control-Allow-Origin"] = "*"
+            origin = request.headers.get("Origin", "")
+            if origin in _origins:
+                response.headers["Access-Control-Allow-Origin"] = origin
+                response.headers["Vary"] = "Origin"
             response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
             response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
             return response
@@ -39,6 +54,11 @@ def create_app():
     # ── Blueprints ─────────────────────────────────────────────────────────
     from app.routes.data_routes import data_bp
     app.register_blueprint(data_bp)
+
+    # Gated dataset downloads. Kept in their own blueprint so that every
+    # endpoint in data_routes can stay public.
+    from app.routes.export_routes import export_bp
+    app.register_blueprint(export_bp)
 
     from app.routes.visits_routes import visits_bp
     app.register_blueprint(visits_bp)

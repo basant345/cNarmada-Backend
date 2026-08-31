@@ -32,12 +32,23 @@ _DB_PATH = os.path.join(os.path.dirname(__file__), "auth.db")
 
 # ── Config from environment (set in .env / Render env vars) ───────────────
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
-SECRET_KEY    = os.environ.get("AUTH_SECRET_KEY", "cnarmada-secret-change-in-prod-2025")
+SECRET_KEY = os.environ.get("AUTH_SECRET_KEY", "")
+if not SECRET_KEY:
+    raise RuntimeError(
+        "AUTH_SECRET_KEY is not set. Refusing to start with a default secret. "
+        "Set it in .env locally and in the host environment in production."
+    )
 
 OTP_EXPIRY_MINUTES = 8
 TOKEN_EXPIRY_HOURS = 24
 
 _EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+
+# Institutional-domain rule and brute-force budget live in auth_guard so that
+# the login flow and the data gate can never drift apart.
+from app.auth_guard import domain_allowed, ALLOWED_EMAIL_DOMAINS
+
+MAX_OTP_ATTEMPTS = 5
 
 
 # ── DB helpers ─────────────────────────────────────────────────────────────
@@ -69,6 +80,12 @@ def _get_conn():
             completed_at DATETIME
         );
     """)
+    # Brute-force counter. Added after the original schema shipped, so it is
+    # applied as a migration. Safe to run on every connection.
+    try:
+        conn.execute("ALTER TABLE otp_store ADD COLUMN attempts INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass
     conn.commit()
     return conn
 
@@ -254,6 +271,15 @@ def send_otp():
         return jsonify({"error": "email is required"}), 400
     if not _EMAIL_RE.match(email):
         return jsonify({"error": "Invalid email address"}), 400
+    if not domain_allowed(email):
+        return jsonify({
+            "error": "domain_not_allowed",
+            "message": (
+                "Data download is restricted to IIT Indore accounts. "
+                "Please sign in with your @iiti.ac.in email address."
+            ),
+            "allowed_domains": ALLOWED_EMAIL_DOMAINS,
+        }), 403
     if not name:
         return jsonify({"error": "name is required"}), 400
     if len(name) < 2:
@@ -330,16 +356,45 @@ def verify_otp():
         _clean_expired(conn)
         now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
-        row = conn.execute(
-            """SELECT id, name FROM otp_store
-               WHERE email=? AND otp=? AND used=0 AND expires_at>?
+        # Fetch the live OTP for this email WITHOUT matching on the code, so a
+        # wrong guess can be counted. Selecting on otp=? (the original form)
+        # made every wrong guess indistinguishable from "no OTP pending",
+        # which is why the code could be brute-forced.
+        pending = conn.execute(
+            """SELECT id, name, otp, attempts FROM otp_store
+               WHERE email=? AND used=0 AND expires_at>?
                ORDER BY id DESC LIMIT 1""",
-            (email, otp, now)
+            (email, now)
         ).fetchone()
 
-        if not row:
+        if not pending:
             _resolve_attempt(conn, email, "Failed")
             return jsonify({"error": "Invalid or expired OTP. Please request a new one."}), 401
+
+        if (pending["attempts"] or 0) >= MAX_OTP_ATTEMPTS:
+            conn.execute("UPDATE otp_store SET used=1 WHERE id=?", (pending["id"],))
+            _resolve_attempt(conn, email, "Failed")
+            conn.commit()
+            return jsonify({
+                "error": "too_many_attempts",
+                "message": "Too many incorrect attempts. Please request a new OTP.",
+            }), 429
+
+        # compare_digest keeps the comparison constant-time.
+        if not hmac.compare_digest(str(pending["otp"]), str(otp)):
+            conn.execute(
+                "UPDATE otp_store SET attempts = COALESCE(attempts, 0) + 1 WHERE id=?",
+                (pending["id"],)
+            )
+            _resolve_attempt(conn, email, "Failed")
+            conn.commit()
+            remaining = MAX_OTP_ATTEMPTS - (pending["attempts"] or 0) - 1
+            return jsonify({
+                "error": "invalid_otp",
+                "message": f"Incorrect OTP. {max(remaining, 0)} attempt(s) remaining.",
+            }), 401
+
+        row = pending
 
         # Mark OTP as used
         conn.execute("UPDATE otp_store SET used=1 WHERE id=?", (row["id"],))

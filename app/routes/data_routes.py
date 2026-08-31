@@ -4,13 +4,22 @@ Public, read-only data API for the cNARMADA "Data" section.
 All routes are prefixed with /api and read from pre-processed JSON/GeoJSON/PNG
 files under app/static/data (built once by scripts/process_data.py).
 
-No auth is applied here on purpose for this phase — these are public datasets
-meant to be viewable without logging in. Auth (OTP / viewer / collaborator /
-admin) can be layered back in later without changing these endpoints.
+Every endpoint in this file is PUBLIC. Viewing, charting and mapping the data
+requires no login at all.
+
+Downloading is separate: the gated equivalents live in export_routes.py and
+require a verified @iiti.ac.in session. The one exception here is the report
+PDF download below, which cannot be moved because its URL is already public
+and must keep working.
 """
 import os
 import json
 from flask import Blueprint, jsonify, current_app, send_from_directory, abort, request
+
+from app.auth_guard import (
+    require_iiti_user, current_user,
+    make_download_token, verify_download_token, lookup_bearer_session,
+)
 
 data_bp = Blueprint("data", __name__, url_prefix="/api")
 
@@ -487,10 +496,47 @@ def list_reports():
 
 @data_bp.route("/reports/<path:filename>")
 def download_report(filename):
+    """
+    Downloading a report requires a verified @iiti.ac.in session.
+
+    Accepts either an Authorization: Bearer header, or a short-lived signed
+    link minted by /reports/<filename>/link. The signed form exists because a
+    plain <a href> cannot send headers. Both paths are checked on the server,
+    so editing the frontend or calling this URL directly does not help.
+    """
     reports = _read_json("reports_index.json")
     if not any(r["filename"] == filename for r in reports):
         abort(404, description="Report not found")
+
+    email = request.args.get("u", "")
+    token = request.args.get("t", "")
+    authorised = bool(email and token and verify_download_token(token, email, filename))
+    if not authorised:
+        authorised = lookup_bearer_session() is not None
+
+    if not authorised:
+        return jsonify({
+            "error": "authentication_required",
+            "message": "Downloads are restricted to IIT Indore (@iiti.ac.in) accounts. "
+                       "Please sign in to download this report.",
+        }), 401
+
     return send_from_directory(_data_path("reports"), filename, as_attachment=True)
+
+
+@data_bp.route("/reports/<path:filename>/link")
+@require_iiti_user
+def report_download_link(filename):
+    """Mint a 5-minute signed URL the browser can follow for a file download."""
+    reports = _read_json("reports_index.json")
+    if not any(r["filename"] == filename for r in reports):
+        abort(404, description="Report not found")
+    user = current_user()
+    return jsonify({
+        "url": f"/api/reports/{filename}?u={user['email']}&t="
+               f"{make_download_token(user['email'], filename)}",
+        "expires_in": 300,
+    })
 
 
 # ──────────────────────────────────────────────────────────────────────────
