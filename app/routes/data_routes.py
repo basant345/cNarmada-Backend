@@ -30,7 +30,7 @@ DISTRICT_SOURCE_FILES = {
     "agriculture": "Agricultural-Profile-of-Narmada-River-Basin_20250924.pdf",
     "water": "Water-Demand-and-Supply-in-NRB.pdf",
     "flood": "Flood-Hazard-Model-of-narmada-River-Basin.pdf",
-    "pollution": "pollution-load-report_20251023.pdf",
+    "pollution": "pollution-load-in-narmada-river-basin_20260314.pdf",
 }
 
 API_CATALOG = [

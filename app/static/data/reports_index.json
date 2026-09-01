@@ -5,9 +5,19 @@
     "size_mb": 0.91
   },
   {
-    "title": "Agricultural Profile of Narmada River Basin 20250924",
+    "title": "Agricultural Profile of Narmada River Basin 2025",
     "filename": "Agricultural-Profile-of-Narmada-River-Basin_20250924.pdf",
     "size_mb": 9.07
+  },
+  {
+    "title": "Biological Profile Report on Narmada River Basin",
+    "filename": "Biological-Profile-Report-on-Narmada-River-Basin.pdf",
+    "size_mb": 3.04
+  },
+  {
+    "title": "Climate Change Assessment Report",
+    "filename": "Climate-Change-Assessment-Report_20260313.pdf",
+    "size_mb": 2.17
   },
   {
     "title": "Climatologic Profile of NRB",
@@ -20,9 +30,19 @@
     "size_mb": 12.19
   },
   {
-    "title": "Flood Hazard Model of narmada River Basin",
+    "title": "Domestic Wastewater Management Plan",
+    "filename": "Domestic-Wastewater-Management-Plan-28.7.26.pdf",
+    "size_mb": 1.76
+  },
+  {
+    "title": "Flood Hazard Model of Narmada River Basin",
     "filename": "Flood-Hazard-Model-of-narmada-River-Basin.pdf",
     "size_mb": 2.46
+  },
+  {
+    "title": "Flood Management Techniques",
+    "filename": "Flood-Management-Techniques_cnarmada.pdf",
+    "size_mb": 3.79
   },
   {
     "title": "Geological Profile Final Report",
@@ -40,9 +60,24 @@
     "size_mb": 2.85
   },
   {
-    "title": "Hydrological Data Report Quarter3 20250802",
+    "title": "Hydrological Data Report Quarter 3",
     "filename": "Hydrological_Data_Report_Quarter3_20250802.pdf",
     "size_mb": 4.56
+  },
+  {
+    "title": "Identification of Major Threats and Challenges for the Narmada River",
+    "filename": "Threats-and-Challenges-of-the-Narmada-River-27-March-2026.pdf",
+    "size_mb": 1.03
+  },
+  {
+    "title": "Industrial Profile of Narmada River Basin",
+    "filename": "Industrial-Profile-Report_Final_cnarmada_20260313.pdf",
+    "size_mb": 4.09
+  },
+  {
+    "title": "Industrial Wastewater Management Plan",
+    "filename": "Industrial-Wastewater-Management-Plan-28.7.26.pdf",
+    "size_mb": 1.27
   },
   {
     "title": "Learnings from International Basins March 2025",
@@ -65,6 +100,11 @@
     "size_mb": 2.25
   },
   {
+    "title": "Mapping of Best Practices in Solid-Liquid Waste Management",
+    "filename": "Mapping-of-Best-Practices-in-Solid-Liquid-Waste-Management-National-and-International-30-03-2026.pdf",
+    "size_mb": 1.16
+  },
+  {
     "title": "Narmada Basin Infrastructure and Planning Report",
     "filename": "Narmada-Basin-Infrastructure-and-Planning-Report.pdf",
     "size_mb": 2.99
@@ -75,29 +115,69 @@
     "size_mb": 1.27
   },
   {
-    "title": "Narmada River Basin Designing a pilot for initiating Monitoring and Feedback 20251023",
-    "filename": "Narmada-River-Basin-Designing-a-pilot-for-initiating-Monitoring-and-Feedback_20251023.pdf",
-    "size_mb": 0.6
-  },
-  {
     "title": "Narmada River at a Glance",
     "filename": "Narmada-River-at-a-Glance.pdf",
     "size_mb": 26.94
   },
   {
-    "title": "Revenue map of narmada river basin",
+    "title": "Narmada River Basin: Assessment of Gross Agricultural Structure",
+    "filename": "Assessment-of-Gross-Agricultural-Structure_20260313.pdf",
+    "size_mb": 4.92
+  },
+  {
+    "title": "Narmada River Basin: Basin-Scale Features",
+    "filename": "Narmada-River-Basin-scale-features.pdf",
+    "size_mb": 9.38
+  },
+  {
+    "title": "Narmada River Basin: Designing a Pilot for Monitoring and Feedback",
+    "filename": "Narmada-River-Basin-Designing-a-pilot-for-initiating-Monitoring-and-Feedback_20251023.pdf",
+    "size_mb": 0.6
+  },
+  {
+    "title": "Narmada River Basin: Land Use and Land Cover (LULC)",
+    "filename": "LULC_Report_cNarmada_Final_20260314.pdf",
+    "size_mb": 3.62
+  },
+  {
+    "title": "Narmada Waterbodies Atlas (Version 1)",
+    "filename": "Waterbodies_Atlas_Report_02_04_2026_D1.pdf",
+    "size_mb": 5.29
+  },
+  {
+    "title": "Nutrient and Sediment Load Report",
+    "filename": "Nutrient-Sediment-Load-Report-final_20260314.pdf",
+    "size_mb": 1.16
+  },
+  {
+    "title": "Physico-Chemical and Biological Profile",
+    "filename": "Physio-chemical-and-biological-Profile-final-report_20260314.pdf",
+    "size_mb": 14.04
+  },
+  {
+    "title": "Pollution Load in Narmada River Basin",
+    "filename": "pollution-load-in-narmada-river-basin_20260314.pdf",
+    "size_mb": 5.9
+  },
+  {
+    "title": "Pollution Source Mapping for Narmada River Basin",
+    "filename": "Pollution-Source-Mapping-Report_20260314.pdf",
+    "size_mb": 10.84
+  },
+  {
+    "title": "Revenue Map of Narmada River Basin",
     "filename": "Revenue_map-of-narmada-river-basin.pdf",
     "size_mb": 2.8
   },
   {
-    "title": "River monitoring protocol report March 2025",
-    "filename": "River-monitoring-protocol-report_March-2025.pdf",
-    "size_mb": 0.79
-  },
-  {
-    "title": "River Atlas Report Draft 4 24 10 2025",
+    "title": "River Atlas Report Draft 4",
     "filename": "River_Atlas_Report_Draft_4_24_10_2025.pdf",
     "size_mb": 6.62
+  },
+  {
+    "title": "River Monitoring Protocol Report March 2025",
+    "filename": "River-monitoring-protocol-report_March-2025.pdf",
+    "size_mb": 0.79
   },
   {
     "title": "Social Environment Report March 2025",
@@ -110,58 +190,13 @@
     "size_mb": 2.53
   },
   {
+    "title": "Water Balance / Accounts / Budget Report",
+    "filename": "Report-water-budgte-20260314.pdf",
+    "size_mb": 12.09
+  },
+  {
     "title": "Water Demand and Supply in NRB",
     "filename": "Water-Demand-and-Supply-in-NRB.pdf",
     "size_mb": 3.03
-  },
-  {
-    "title": "pollution load report 20251023",
-    "filename": "pollution-load-report_20251023.pdf",
-    "size_mb": 5.92
-  },
-  {
-    "title": "Biological Profile Report on Narmada River Basin",
-    "filename": "Biological-Profile-Report-on-Narmada-River-Basin.pdf",
-    "size_mb": 3.04
-  },
-  {
-    "title": "Domestic Wastewater Management Plan",
-    "filename": "Domestic-Wastewater-Management-Plan-28.7.26.pdf",
-    "size_mb": 1.76
-  },
-  {
-    "title": "Nutrient and Sediment Load Report",
-    "filename": "IIT-Indore-Nutrient-Sediment-Load-Report.docx",
-    "size_mb": 3.81
-  },
-  {
-    "title": "Physico-chemical and Biological Water Quality Report",
-    "filename": "IIT-Indore_Physico-chemical-and-Biological_11.25-1-2.pdf",
-    "size_mb": 21.25
-  },
-  {
-    "title": "Industrial Profile Report",
-    "filename": "Industrial-Profile-Report_R0-2.docx",
-    "size_mb": 6.28
-  },
-  {
-    "title": "Industrial Wastewater Management Plan",
-    "filename": "Industrial-Wastewater-Management-Plan-28.7.26.pdf",
-    "size_mb": 1.27
-  },
-  {
-    "title": "Mapping of Best Practices in Solid-Liquid Waste Management (National & International)",
-    "filename": "Mapping-of-Best-Practices-in-Solid-Liquid-Waste-Management-National-and-International-30-03-2026.pdf",
-    "size_mb": 1.16
-  },
-  {
-    "title": "Pollution Source Mapping Report (Q6)",
-    "filename": "Pollution-Source-Mapping-Report-Q629.9.25.pdf",
-    "size_mb": 9.36
-  },
-  {
-    "title": "Threats and Challenges of the Narmada River (Quarter 8)",
-    "filename": "Quarter-8-Threats-and-challenges-of-the-Narmada-River-27-March-2026-1.docx",
-    "size_mb": 1.46
   }
 ]
