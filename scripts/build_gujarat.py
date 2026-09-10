@@ -379,6 +379,25 @@ def main():
     root = Path(sys.argv[1])
 
     wq = build_water_quality(root / "Narmada river water quality data")
+    sw_pre = build_solid_waste(root / "data extracted from DEP22 for pollution reports.xlsx") \
+        if (root / "data extracted from DEP22 for pollution reports.xlsx").exists() else {"categories": []}
+    sed_pre = (root / "gujarat sediment data cwc till 2025.csv").exists()
+
+    # Refuse to write anything unless all three sources were found, so a wrong
+    # folder path cannot produce empty datasets that render as blank dropdowns.
+    missing = []
+    if not wq["stations"]:
+        missing.append('"Narmada river water quality data/" (three .xlsx station files)')
+    if not sw_pre["categories"]:
+        missing.append('"data extracted from DEP22 for pollution reports.xlsx"')
+    if not sed_pre:
+        missing.append('"gujarat sediment data cwc till 2025.csv"')
+    if missing:
+        sys.exit(
+            f'Nothing written. Not found in "{root}":\n  - ' + "\n  - ".join(missing) +
+            "\n\nPoint the script at the folder that holds all of them."
+        )
+
     print(f"water quality: {len(wq['stations'])} stations, {len(wq['parameters'])} parameters")
     for s in wq["stations"]:
         print(f"   {s['name'][:42]:<44} {s['records']:>4} records  {s['from']} .. {s['to']}"

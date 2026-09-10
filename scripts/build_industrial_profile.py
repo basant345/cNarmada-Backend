@@ -238,6 +238,29 @@ def main():
         "monitoring": build_monitoring(folder),
     }
 
+    # Refuse to write a half-built file. Previously the JSON was saved before
+    # the summary ran, so pointing this script at a folder missing some CSVs
+    # produced a file with null sections that then crashed the page.
+    missing = []
+    if payload["categorisation"] is None:
+        missing.append(CATEGORY_FILE)
+    if payload["monitoring"] is None:
+        missing.append(MONITORING_FILE)
+    if not payload["parks"]["items"]:
+        missing.append("the MPIDC / MSME park CSVs")
+    elif len(payload["parks"]["sources"]) < len(PARK_FILES):
+        found = set(payload["parks"]["sources"])
+        missing += [
+            f for _, _, f in PARK_FILES
+            if not any(s.endswith(f) or s == f for s in found)
+        ]
+    if missing:
+        sys.exit(
+            "Nothing written. These source files were not found in "
+            f'"{folder}":\n  - ' + "\n  - ".join(missing) +
+            "\n\nPoint the script at the folder that holds all eight CSVs."
+        )
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", encoding="utf-8") as handle:
         json.dump(payload, handle, ensure_ascii=False, separators=(",", ":"))
