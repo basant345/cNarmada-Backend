@@ -58,6 +58,11 @@ API_CATALOG = [
     {"method": "GET", "path": "/api/districts/<slug>", "description": "Full report-sourced profile for one district: overview, land use, water resources, and insights & alerts, each citing its source report."},
     {"method": "GET", "path": "/api/water-quality-10yr", "description": "10-year comparative water quality data (2015-16 to 2024-25) — Avg/Max/Min per station and parameter, by year."},
     {"method": "GET", "path": "/api/ground-water", "description": "Ground water quality: Avg/Min/Max per parameter and station, for the Middle and Upper Narmada basin CGWB network."},
+    {"method": "GET", "path": "/api/biodiversity", "description": "Biodiversity tree: basin zone -> group -> taxonomic rank -> species, plus group composition where the source records no species names."},
+    {"method": "GET", "path": "/api/gujarat/water-quality", "description": "Gujarat: Narmada river water quality, monthly records 2015-2025 for Garudeshwar, Panetha and Zanor."},
+    {"method": "GET", "path": "/api/gujarat/solid-waste", "description": "Gujarat: solid, plastic, C&D, biomedical, hazardous, e-waste, domestic, STP and industrial waste from the DEP22 pollution report."},
+    {"method": "GET", "path": "/api/gujarat/sediment", "description": "Gujarat: CWC manual daily suspended sediment (g/L), 11 stations, aggregated by year 1973-2025."},
+    {"method": "GET", "path": "/api/industrial-profile", "description": "Industrial profile of the Upper and Middle Narmada basin: MPPCB Red/Orange/Green industry counts by district, MPIDC and MSME industrial park locations, and real-time monitoring stations by sector."},
     {"method": "GET", "path": "/api/solid-waste", "description": "District-wise solid, hazardous, biomedical, electronic, C&D and plastic waste generation and management status."},
     {"method": "GET", "path": "/api/geojson/agriculture/<layer>", "description": "Agriculture GeoJSON layers: crop_irrigated_area, orchards_horticulture."},
 ]
@@ -554,6 +559,45 @@ def water_quality_10yr():
 @data_bp.route("/ground-water")
 def ground_water():
     return jsonify(_read_json("ground_water.json"))
+
+
+# ──────────────────────────────────────────────────────────────────────────
+# Biodiversity (basin zone -> group -> class/order/family -> species)
+# Built from the Biological Profile workbook by scripts/build_biodiversity.py.
+# ──────────────────────────────────────────────────────────────────────────
+@data_bp.route("/biodiversity")
+def biodiversity():
+    return jsonify(_read_json("biodiversity.json"))
+
+
+# ──────────────────────────────────────────────────────────────────────────
+# Industrial profile (Upper and Middle Narmada basin).
+# Built by scripts/build_industrial_profile.py from the MPIDC / MSME / MPPCB
+# CSVs. Served alongside the solid waste dataset on the same page.
+# ──────────────────────────────────────────────────────────────────────────
+@data_bp.route("/industrial-profile")
+def industrial_profile():
+    return jsonify(_read_json("industrial_profile.json"))
+
+
+# ──────────────────────────────────────────────────────────────────────────
+# Gujarat datasets. Kept on their own endpoints so the existing Madhya Pradesh
+# and Narmada-basin datasets above are untouched.
+# Built by scripts/build_gujarat.py from the "Data from reports" folder.
+# ──────────────────────────────────────────────────────────────────────────
+@data_bp.route("/gujarat/water-quality")
+def gujarat_water_quality():
+    return jsonify(_read_json("gujarat_water_quality.json"))
+
+
+@data_bp.route("/gujarat/solid-waste")
+def gujarat_solid_waste():
+    return jsonify(_read_json("gujarat_solid_waste.json"))
+
+
+@data_bp.route("/gujarat/sediment")
+def gujarat_sediment():
+    return jsonify(_read_json("gujarat_sediment.json"))
 
 
 # ──────────────────────────────────────────────────────────────────────────

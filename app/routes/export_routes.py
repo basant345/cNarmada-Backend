@@ -59,6 +59,38 @@ def export_solid_waste():
     return jsonify(_read_json("solid_waste.json"))
 
 
+# ──────────────────────────────────────────────────────────────────────────
+# Industrial profile and the Gujarat datasets.
+#
+# data_routes.py serves each of these openly so the charts and maps render for
+# everyone. These gated twins exist so the Excel downloads go through the same
+# @iiti.ac.in check as every other export. Without them the frontend would call
+# the public endpoint, get a 200, and save the file without ever prompting.
+# ──────────────────────────────────────────────────────────────────────────
+@export_bp.route("/industrial-profile")
+@require_iiti_user
+def export_industrial_profile():
+    return jsonify(_read_json("industrial_profile.json"))
+
+
+@export_bp.route("/gujarat/water-quality")
+@require_iiti_user
+def export_gujarat_water_quality():
+    return jsonify(_read_json("gujarat_water_quality.json"))
+
+
+@export_bp.route("/gujarat/solid-waste")
+@require_iiti_user
+def export_gujarat_solid_waste():
+    return jsonify(_read_json("gujarat_solid_waste.json"))
+
+
+@export_bp.route("/gujarat/sediment")
+@require_iiti_user
+def export_gujarat_sediment():
+    return jsonify(_read_json("gujarat_sediment.json"))
+
+
 @export_bp.route("/basin-demography")
 @require_iiti_user
 def export_basin_demography():
