@@ -60,8 +60,22 @@ def create_app():
     from app.routes.export_routes import export_bp
     app.register_blueprint(export_bp)
 
-    from app.routes.visits_routes import visits_bp
-    app.register_blueprint(visits_bp)
+    # River Atlas map layers. Its own blueprint so the catalogue and the
+    # GeoJSON layers stay independent of the /api/geojson/* set in
+    # data_routes.py, and so new River Atlas datasets can be added without
+    # touching any other route module.
+    from app.routes.river_atlas_routes import river_atlas_bp
+    app.register_blueprint(river_atlas_bp)
+
+    # Narmada Mitra assistant. Answers from a curated knowledge base with no
+    # model and no outbound call, so it adds no meaningful load.
+    from app.routes.chatbot_routes import chatbot_bp
+    app.register_blueprint(chatbot_bp)
+
+    # Keyword search across pages, datasets, reports, stations and the API
+    # catalogue, built from the published data on this server.
+    from app.routes.search_routes import search_bp
+    app.register_blueprint(search_bp)
 
     from app.routes.sewer_outfall_routes import sewer_bp
     app.register_blueprint(sewer_bp)

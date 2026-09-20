@@ -1,0 +1,25 @@
+# Keep Git's line-ending conversion away from binary payloads.
+#
+# Git guesses whether a file is text. When it guesses wrong on a compressed
+# file and core.autocrlf is on (the Windows default), it rewrites LF bytes
+# inside the compressed body. The file still looks like a gzip stream, with
+# valid magic bytes and a valid size trailer, but it no longer decompresses.
+# A browser fetching it aborts with ERR_CONTENT_DECODING_FAILED and the map
+# layer silently fails to load.
+*.gz     binary
+*.zip    binary
+*.pdf    binary
+*.xlsx   binary
+*.xls    binary
+*.db     binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.tif    binary
+*.tiff   binary
+*.mp4    binary
+
+# GeoJSON and JSON are text, but they are generated artefacts that should
+# round-trip byte for byte, so leave their line endings alone too.
+*.geojson -text
+*.json    -text
