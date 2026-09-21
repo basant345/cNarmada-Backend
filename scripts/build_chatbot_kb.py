@@ -90,9 +90,10 @@ def gather_facts():
     unnamed = layers.get("unnamed_streams") or {}
     f["unnamed_served"] = unnamed.get("feature_count", 0)
     coverage = unnamed.get("coverage") or {}
-    f["unnamed_source"] = coverage.get("source_features", 0)
-    f["unnamed_min_order"] = coverage.get("min_stream_order", 0)
-    f["unnamed_km"] = coverage.get("served_length_km", 0)
+    f["unnamed_km"] = coverage.get("source_length_km", 0)
+    f["unnamed_overview_order"] = coverage.get("overview_min_order", 0)
+    bands = ((unnamed.get("tiles") or {}).get("bands")) or []
+    f["unnamed_detail_zoom"] = min((b.get("min_zoom", 0) for b in bands), default=0)
 
     # Centre-line length, straight from the published geometry's own record.
     centre = load("river_atlas", "centre_line.geojson") or {}
@@ -127,15 +128,15 @@ def build_entries(f):
             "id": "tributaries",
             "tags": ["tributary", "tributaries", "stream", "streams", "network", "named", "unnamed",
                      "drainage", "how many rivers"],
-            "en": "The River Atlas carries {named_streams:,} named tributaries and the unnamed "
-                  "stream network. The unnamed layer is published at Strahler order "
-                  "{unnamed_min_order} and above, which is {unnamed_served:,} reaches "
-                  "({unnamed_km:,.0f} km) out of {unnamed_source:,} in the source data. The full "
-                  "set is far too large to draw in a browser.",
-            "hi": "नदी एटलस में {named_streams:,} नामित सहायक नदियाँ तथा अनाम धारा नेटवर्क शामिल हैं। "
-                  "अनाम परत स्ट्रालर क्रम {unnamed_min_order} और उससे ऊपर पर प्रकाशित है, अर्थात "
-                  "स्रोत डेटा के {unnamed_source:,} खंडों में से {unnamed_served:,} खंड "
-                  "({unnamed_km:,.0f} किमी)। पूरा सेट ब्राउज़र में बनाने के लिए बहुत बड़ा है।",
+            "en": "The River Atlas carries {named_streams:,} named tributaries and the complete "
+                  "unnamed stream network: all {unnamed_served:,} reaches ({unnamed_km:,.0f} km), "
+                  "with original geometry, drawn at every zoom level. Click any stream to see its "
+                  "record. To click the smallest streams, zoom in to level "
+                  "{unnamed_detail_zoom} or closer.",
+            "hi": "नदी एटलस में {named_streams:,} नामित सहायक नदियाँ और पूरा अनाम धारा नेटवर्क शामिल है: "
+                  "सभी {unnamed_served:,} खंड ({unnamed_km:,.0f} किमी), मूल ज्यामिति के साथ, हर ज़ूम "
+                  "स्तर पर। किसी भी धारा पर क्लिक करके उसका विवरण देखें। सबसे छोटी धाराओं पर क्लिक "
+                  "करने के लिए ज़ूम स्तर {unnamed_detail_zoom} या उससे अधिक पर जाएँ।",
             "links": [{"label": "River Atlas", "to": "/river-atlas"}],
         },
         {

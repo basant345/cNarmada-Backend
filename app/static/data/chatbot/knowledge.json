@@ -1,7 +1,7 @@
 {
   "name": "Narmada Mitra",
   "name_hi": "नर्मदा मित्र",
-  "generated_on": "2026-09-20",
+  "generated_on": "2026-09-21",
   "greeting": {
     "en": "Namaste, I am Narmada Mitra. Ask me about the Narmada basin, the datasets on this portal, where they come from, or how to find something.",
     "hi": "नमस्ते, मैं नर्मदा मित्र हूँ। नर्मदा बेसिन, इस पोर्टल के डेटासेट, उनके स्रोत, या कुछ ढूँढने के तरीके के बारे में मुझसे पूछें।"
@@ -31,7 +31,7 @@
     "stations_mapped": 30,
     "stations_flow": 34,
     "stations_level": 38,
-    "reports_total": 40,
+    "reports_total": 33,
     "species_total": 847,
     "bio_zones": 3,
     "gw_regions": 2,
@@ -44,10 +44,10 @@
     "monitoring_sectors": 12,
     "atlas_layers": 4,
     "named_streams": 1040,
-    "unnamed_served": 29887,
-    "unnamed_source": 488755,
-    "unnamed_min_order": 4,
-    "unnamed_km": 10140.5,
+    "unnamed_served": 488755,
+    "unnamed_km": 195302.6,
+    "unnamed_overview_order": 4,
+    "unnamed_detail_zoom": 10,
     "centreline_km": 1375.735
   },
   "entries": [
@@ -108,8 +108,8 @@
         "अपवाह"
       ],
       "answer": {
-        "en": "The River Atlas carries 1,040 named tributaries and the unnamed stream network. The unnamed layer is published at Strahler order 4 and above, which is 29,887 reaches (10,140 km) out of 488,755 in the source data. The full set is far too large to draw in a browser.",
-        "hi": "नदी एटलस में 1,040 नामित सहायक नदियाँ तथा अनाम धारा नेटवर्क शामिल हैं। अनाम परत स्ट्रालर क्रम 4 और उससे ऊपर पर प्रकाशित है, अर्थात स्रोत डेटा के 488,755 खंडों में से 29,887 खंड (10,140 किमी)। पूरा सेट ब्राउज़र में बनाने के लिए बहुत बड़ा है।"
+        "en": "The River Atlas carries 1,040 named tributaries and the complete unnamed stream network: all 488,755 reaches (195,303 km), with original geometry, drawn at every zoom level. Click any stream to see its record. To click the smallest streams, zoom in to level 10 or closer.",
+        "hi": "नदी एटलस में 1,040 नामित सहायक नदियाँ और पूरा अनाम धारा नेटवर्क शामिल है: सभी 488,755 खंड (195,303 किमी), मूल ज्यामिति के साथ, हर ज़ूम स्तर पर। किसी भी धारा पर क्लिक करके उसका विवरण देखें। सबसे छोटी धाराओं पर क्लिक करने के लिए ज़ूम स्तर 10 या उससे अधिक पर जाएँ।"
       },
       "links": [
         {
@@ -637,8 +637,8 @@
         "अध्ययन"
       ],
       "answer": {
-        "en": "The Reports section holds 40 published documents as PDFs, covering the basin's condition assessment and supporting studies.",
-        "hi": "रिपोर्ट अनुभाग में 40 प्रकाशित दस्तावेज़ PDF रूप में हैं, जो बेसिन के स्थिति आकलन और सहायक अध्ययनों को कवर करते हैं।"
+        "en": "The Reports section holds 33 published documents as PDFs, covering the basin's condition assessment and supporting studies.",
+        "hi": "रिपोर्ट अनुभाग में 33 प्रकाशित दस्तावेज़ PDF रूप में हैं, जो बेसिन के स्थिति आकलन और सहायक अध्ययनों को कवर करते हैं।"
       },
       "links": [
         {

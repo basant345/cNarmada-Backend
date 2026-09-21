@@ -7,6 +7,14 @@ Endpoints
                                      order, default visibility and popup
                                      field labels
   GET /api/river-atlas/layer/<id>    one layer as GeoJSON
+  GET /api/river-atlas/layer/<id>/tile/<band>/<z>/<x>/<y>
+                                     one tile of a tiled layer, for layers
+                                     too large to send whole (the catalogue
+                                     entry's "tiles" block lists them)
+  GET /api/river-atlas/layer/<id>/raster/<z>/<x>/<y>.png
+                                     a pre-drawn image tile of a layer too
+                                     dense to draw as vectors when zoomed
+                                     out (the entry's "raster" block)
 
 The catalogue is the contract. The River Atlas page draws whatever the
 catalogue lists — layer toggles, legend swatches, colours, popup rows are
@@ -100,19 +108,146 @@ def _gzip_matches(gz_path, plain_path):
     return ok
 
 
+def _raster_dir(layer_id):
+    return os.path.join(_dir(), "tiles", layer_id, "raster")
+
+
+def _raster_present(layer_id, raster):
+    """True when the zoom folders the catalogue promises exist and hold tiles."""
+    root = _raster_dir(layer_id)
+    for z in range(raster.get("min_zoom", 0), raster.get("max_zoom", -1) + 1):
+        zdir = os.path.join(root, str(z))
+        if not os.path.isdir(zdir) or not os.listdir(zdir):
+            return False
+    return os.path.isdir(root)
+
+
+def _stamp(*paths):
+    """
+    A short version tag from the files' modification times and sizes.
+
+    Added to every data URL as ?v=..., so when a layer or its tiles are
+    replaced the browser fetches the new copy instead of reusing a cached
+    one. Responses are cached for a day, which is right for unchanged data
+    and wrong the moment the data changes; the tag keeps both true.
+    """
+    parts = []
+    for path in paths:
+        try:
+            st = os.stat(path)
+            parts.append(f"{st.st_mtime_ns}:{st.st_size}")
+        except OSError:
+            parts.append("-")
+    return format(zlib.crc32("|".join(parts).encode()) & 0xFFFFFFFF, "08x")
+
+
 def _public_catalog(catalog):
     """Add the fetch URL for each layer, and drop server-side-only keys."""
     out = dict(catalog)
     layers = []
     for layer in catalog.get("layers", []):
         entry = {k: v for k, v in layer.items() if k != "file"}
-        entry["url"] = f"/api/river-atlas/layer/{layer['id']}"
+        layer_path = os.path.join(_dir(), layer["file"])
+        entry["url"] = f"/api/river-atlas/layer/{layer['id']}?v={_stamp(layer_path)}"
         entry["available"] = os.path.exists(os.path.join(_dir(), layer["file"]))
+        # Image tiles are only advertised when they are actually on disk.
+        # Without them the page draws the layer's vectors as usual, so a
+        # missing or misplaced tiles folder can never hide the layer.
+        if entry.get("raster") and not _raster_present(layer["id"], entry["raster"]):
+            current_app.logger.warning(
+                "River Atlas: image tiles for %s not found under tiles/%s/raster/. "
+                "Drawing its vectors instead.", layer["id"], layer["id"])
+            entry.pop("raster")
+        if entry.get("raster"):
+            raster = dict(entry["raster"])
+            zoom_dirs = [os.path.join(_raster_dir(layer["id"]), str(z))
+                         for z in range(raster["min_zoom"], raster["max_zoom"] + 1)]
+            raster["url"] = f"{raster['url']}?v={_stamp(*zoom_dirs)}"
+            entry["raster"] = raster
+        if entry.get("tiles"):
+            tiles = dict(entry["tiles"])
+            band_dirs = [os.path.join(_dir(), "tiles", layer["id"], b["id"], str(b["tile_zoom"]))
+                         for b in tiles.get("bands", [])]
+            tiles["url"] = f"{tiles['url']}?v={_stamp(os.path.join(_dir(), CATALOG_FILE), *band_dirs)}"
+            entry["tiles"] = tiles
         layers.append(entry)
     # Draw order is data, not an accident of file order.
     layers.sort(key=lambda entry: entry.get("z_index", 0))
     out["layers"] = layers
     return out
+
+
+# Tiles are small and numerous, so each one is checked once per process,
+# the first time it is served: a full decompress validates its CRC.
+_TILE_OK = {}
+
+
+def _tile_sound(path):
+    try:
+        stamp = os.stat(path)
+    except OSError:
+        return False
+    key = (stamp.st_mtime_ns, stamp.st_size)
+    cached = _TILE_OK.get(path)
+    if cached is not None and cached[0] == key:
+        return cached[1]
+    try:
+        with gzip.open(path, "rb") as fh:
+            while fh.read(1 << 20):
+                pass
+        ok = True
+    except (OSError, EOFError, zlib.error):
+        ok = False
+    _TILE_OK[path] = (key, ok)
+    return ok
+
+
+@river_atlas_bp.route("/layer/<layer_id>/tile/<band_id>/<int:z>/<int:x>/<int:y>")
+def tile(layer_id, band_id, z, x, y):
+    """
+    One tile of a tiled layer.
+
+    Tiles are stored gzip-only, as tiles/<layer>/<band>/<z>/<x>/<y>.geojson.gz.
+    The path is built from the catalogue's own ids and from integers, never
+    from free text, so a request can only reach a tile the catalogue names.
+    A tile inside the band that holds no features answers with an empty
+    FeatureCollection rather than a 404, so the map treats it as done.
+    """
+    catalog = _load_catalog()
+    if catalog is None:
+        return jsonify({"error": "River Atlas data has not been built on this server."}), 404
+
+    entry = next((l for l in catalog.get("layers", []) if l.get("id") == layer_id), None)
+    tiles_cfg = (entry or {}).get("tiles") or {}
+    band = next((b for b in tiles_cfg.get("bands", []) if b.get("id") == band_id), None)
+    if entry is None or band is None:
+        return jsonify({"error": f"Unknown tiled layer or band: {layer_id}/{band_id}"}), 404
+    if z != band.get("tile_zoom"):
+        return jsonify({"error": f"Band {band_id} is tiled at zoom {band.get('tile_zoom')} only."}), 404
+
+    path = os.path.join(_dir(), "tiles", layer_id, band_id, str(z), str(x), f"{y}.geojson.gz")
+    if not os.path.exists(path):
+        body = json.dumps({"type": "FeatureCollection", "features": []})
+        response = Response(body, mimetype="application/geo+json")
+        response.headers["Cache-Control"] = "no-store"
+    elif not _tile_sound(path):
+        current_app.logger.warning("River Atlas: tile %s is damaged. Re-copy it "
+                                   "and make sure Git treats *.gz as binary.", path)
+        return jsonify({"error": "This tile is damaged on the server."}), 500
+    elif "gzip" in request.headers.get("Accept-Encoding", "").lower():
+        with open(path, "rb") as fh:
+            body = fh.read()
+        response = Response(body, mimetype="application/geo+json")
+        response.headers["Content-Encoding"] = "gzip"
+        response.headers["Content-Length"] = str(len(body))
+    else:
+        # A client that does not take gzip (curl with no flags) still works.
+        with gzip.open(path, "rb") as fh:
+            response = Response(fh.read(), mimetype="application/geo+json")
+
+    response.headers["Vary"] = "Accept-Encoding"
+    response.headers.setdefault("Cache-Control", "public, max-age=86400")
+    return response
 
 
 @river_atlas_bp.route("/layers")
@@ -124,7 +259,10 @@ def layers():
             "hint": "Run scripts/build_river_atlas.py to generate "
                     "app/static/data/river_atlas/.",
         }), 404
-    return jsonify(_public_catalog(catalog))
+    response = jsonify(_public_catalog(catalog))
+    # Always re-read, so new ?v= tags reach the page straight away.
+    response.headers["Cache-Control"] = "no-cache"
+    return response
 
 
 @river_atlas_bp.route("/layer/<layer_id>")
@@ -173,5 +311,63 @@ def layer(layer_id):
 
     # These layers change only when the shapefiles are rebuilt and
     # redeployed, so let the browser keep them for a day.
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+# A fully transparent 256x256 PNG, answered for any tile inside the raster's
+# zoom range that has nothing drawn on it. Built once, on first use.
+_BLANK_PNG = None
+
+
+def _blank_png():
+    global _BLANK_PNG
+    if _BLANK_PNG is None:
+        import struct
+
+        def chunk(kind, data):
+            body = kind + data
+            return struct.pack(">I", len(data)) + body + struct.pack(">I", zlib.crc32(body) & 0xFFFFFFFF)
+
+        row = b"\x00" + b"\x00\x00\x00\x00" * 256
+        _BLANK_PNG = (b"\x89PNG\r\n\x1a\n"
+                      + chunk(b"IHDR", struct.pack(">IIBBBBB", 256, 256, 8, 6, 0, 0, 0))
+                      + chunk(b"IDAT", zlib.compress(row * 256, 9))
+                      + chunk(b"IEND", b""))
+    return _BLANK_PNG
+
+
+@river_atlas_bp.route("/layer/<layer_id>/raster/<int:z>/<int:x>/<int:y>.png")
+def raster_tile(layer_id, z, x, y):
+    """
+    One pre-drawn image tile, stored as tiles/<layer>/raster/<z>/<x>/<y>.png.
+
+    As with the vector tiles, the path is built from a catalogue id and
+    integers only. Inside the raster's zoom range an empty spot gets a
+    transparent tile, so the map never shows a broken image.
+    """
+    catalog = _load_catalog()
+    if catalog is None:
+        return jsonify({"error": "River Atlas data has not been built on this server."}), 404
+
+    entry = next((l for l in catalog.get("layers", []) if l.get("id") == layer_id), None)
+    raster = (entry or {}).get("raster")
+    if not raster:
+        return jsonify({"error": f"Layer {layer_id} has no image tiles."}), 404
+    if not raster.get("min_zoom", 0) <= z <= raster.get("max_zoom", -1):
+        return jsonify({"error": "Zoom outside this layer's image tiles."}), 404
+
+    if not _raster_present(layer_id, raster):
+        return jsonify({"error": f"Image tiles for {layer_id} are not on this server.",
+                        "expected": f"app/static/data/river_atlas/tiles/{layer_id}/raster/<z>/<x>/<y>.png"}), 404
+
+    path = os.path.join(_raster_dir(layer_id), str(z), str(x), f"{y}.png")
+    if os.path.exists(path):
+        response = send_file(path, mimetype="image/png", conditional=True)
+    else:
+        # A stand-in, not data: never let the browser keep it.
+        response = Response(_blank_png(), mimetype="image/png")
+        response.headers["Cache-Control"] = "no-store"
+        return response
     response.headers["Cache-Control"] = "public, max-age=86400"
     return response
