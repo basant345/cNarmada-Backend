@@ -141,6 +141,48 @@ def _stamp(*paths):
     return format(zlib.crc32("|".join(parts).encode()) & 0xFFFFFFFF, "08x")
 
 
+# The district boundaries live once, in the water atlas folder, and are
+# published to both atlas pages. If this catalogue does not carry its own
+# districts layer, the shared one is added here, so district filtering
+# works whether or not a copy of the boundaries sits beside the river
+# layers.
+WATER_FOLDER = "water_atlas"
+
+
+def _water_catalog():
+    path = os.path.join(current_app.config["DATA_DIR"], WATER_FOLDER, CATALOG_FILE)
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return None
+
+
+def _shared_district_entry(out):
+    """The district layer as the water atlas publishes it, served from there."""
+    water = _water_catalog()
+    if not water:
+        return None
+    layer_id = water.get("district_layer", "districts")
+    source = next((l for l in water.get("layers", []) if l.get("id") == layer_id), None)
+    if not source:
+        return None
+    path = os.path.join(current_app.config["DATA_DIR"], WATER_FOLDER, source["file"])
+
+    entry = {k: v for k, v in source.items() if k != "file"}
+    entry["url"] = f"/api/atlas/districts?v={_stamp(path)}"
+    entry["available"] = os.path.exists(path)
+    # Under everything else: the boundaries are context for the rivers.
+    entry["z_index"] = min([l.get("z_index", 0) for l in out.get("layers", [])] or [1]) - 1
+    entry["default_visible"] = False
+    out.setdefault("district_layer", layer_id)
+    out.setdefault("district_name_field", water.get("district_name_field", "NAME_2"))
+    out.setdefault("district_state_field", water.get("district_state_field", "NAME_1"))
+    return entry
+
+
 def _public_catalog(catalog):
     """Add the fetch URL for each layer, and drop server-side-only keys."""
     out = dict(catalog)
@@ -164,6 +206,13 @@ def _public_catalog(catalog):
                          for z in range(raster["min_zoom"], raster["max_zoom"] + 1)]
             raster["url"] = f"{raster['url']}?v={_stamp(*zoom_dirs)}"
             entry["raster"] = raster
+        # A hairline drawn on a canvas is only as clickable as it is wide,
+        # so line layers get a hit tolerance unless the catalogue sets its
+        # own. Filled layers get none: a tolerance there would take clicks
+        # meant for whatever lies underneath.
+        if (entry.get("canvas") and "hit_tolerance" not in entry
+                and "LineString" in str(entry.get("geometry_type") or "")):
+            entry["hit_tolerance"] = 8
         if entry.get("tiles"):
             tiles = dict(entry["tiles"])
             band_dirs = [os.path.join(_dir(), "tiles", layer["id"], b["id"], str(b["tile_zoom"]))
@@ -171,6 +220,11 @@ def _public_catalog(catalog):
             tiles["url"] = f"{tiles['url']}?v={_stamp(os.path.join(_dir(), CATALOG_FILE), *band_dirs)}"
             entry["tiles"] = tiles
         layers.append(entry)
+    out["layers"] = layers
+    if not any(l.get("id") == out.get("district_layer", "districts") for l in layers):
+        shared = _shared_district_entry(out)
+        if shared:
+            layers.append(shared)
     # Draw order is data, not an accident of file order.
     layers.sort(key=lambda entry: entry.get("z_index", 0))
     out["layers"] = layers

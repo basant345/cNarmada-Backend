@@ -52,6 +52,8 @@ PAGES = [
      "macrophytes, fish, birds, reptiles, amphibians"),
     ("River Atlas", "/river-atlas", "dataset",
      "Narmada basin, centre line, named and unnamed stream networks with full metadata"),
+    ("Water Body Atlas", "/water-body-atlas", "dataset",
+     "Named and unnamed water bodies of the Narmada basin, filterable by district"),
     ("API Catalog", "/data/api-catalog", "page", "Every public read endpoint on the portal"),
     ("User Manual", "/data/user-manual", "page", "How to use the portal and its datasets"),
     ("Reports", "/reports", "page", "Published basin reports and studies"),
@@ -133,6 +135,15 @@ def build_docs():
             "to": "/river-atlas",
             "kind": "layer",
             "detail": f"River Atlas layer · {layer.get('feature_count', 0):,} features",
+        })
+
+    water = _read("water_atlas", "catalog.json") or {}
+    for layer in water.get("layers", []):
+        docs.append({
+            "title": layer.get("name", layer.get("id", "")),
+            "to": "/water-body-atlas",
+            "kind": "layer",
+            "detail": f"Water Body Atlas layer · {layer.get('feature_count', 0):,} features",
         })
 
     try:

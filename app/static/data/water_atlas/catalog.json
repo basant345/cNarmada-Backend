@@ -1,0 +1,299 @@
+{
+  "id": "water_bodies",
+  "title": "Narmada Water Body Atlas",
+  "title_hi": "नर्मदा जल निकाय एटलस",
+  "fit_layer": "districts",
+  "attribution": "cNARMADA, Indian Institute of Technology Indore",
+  "district_layer": "districts",
+  "district_name_field": "NAME_2",
+  "district_state_field": "NAME_1",
+  "layers": [
+    {
+      "id": "districts",
+      "file": "districts.geojson",
+      "name": "District Boundaries",
+      "name_hi": "जिला सीमाएँ",
+      "description": "District boundaries of the Narmada basin, as supplied.",
+      "description_hi": "नर्मदा बेसिन की जिला सीमाएँ, यथा-प्राप्त।",
+      "geometry_type": "MultiPolygon",
+      "feature_count": 40,
+      "default_visible": true,
+      "z_index": 1,
+      "canvas": false,
+      "style": {
+        "color": "#475569",
+        "weight": 1,
+        "opacity": 0.9,
+        "fill": true,
+        "fillColor": "#f8fafc",
+        "fillOpacity": 0.35
+      },
+      "highlight_style": {
+        "color": "#0f172a",
+        "weight": 2,
+        "opacity": 1
+      },
+      "legend": {
+        "type": "fill",
+        "color": "#475569",
+        "fillColor": "#f8fafc"
+      },
+      "label_field": "NAME_2",
+      "fields": [
+        {
+          "key": "NAME_2",
+          "label": "District",
+          "label_hi": "जिला"
+        },
+        {
+          "key": "NAME_1",
+          "label": "State",
+          "label_hi": "राज्य"
+        },
+        {
+          "key": "NAME_0",
+          "label": "Country",
+          "label_hi": "देश"
+        },
+        {
+          "key": "TYPE_2",
+          "label": "Type",
+          "label_hi": "प्रकार"
+        },
+        {
+          "key": "ENGTYPE_2",
+          "label": "Type (English)",
+          "label_hi": "प्रकार (अंग्रेज़ी)"
+        },
+        {
+          "key": "HASC_2",
+          "label": "HASC code",
+          "label_hi": "HASC कोड"
+        },
+        {
+          "key": "VARNAME_2",
+          "label": "Other names",
+          "label_hi": "अन्य नाम"
+        },
+        {
+          "key": "ID_2",
+          "label": "District ID",
+          "label_hi": "जिला आईडी"
+        }
+      ],
+      "absent_values": [
+        "",
+        "<Null>",
+        "0"
+      ],
+      "source": "Narmada_District boundaries (supplied), WGS 84"
+    },
+    {
+      "id": "named_water_bodies",
+      "file": "named_water_bodies.geojson",
+      "name": "Named Water Bodies",
+      "name_hi": "नामित जल निकाय",
+      "description": "Water bodies that carry a name in the supplied dataset.",
+      "description_hi": "प्रदत्त डेटासेट में नाम वाले जल निकाय।",
+      "geometry_type": "Polygon",
+      "feature_count": 469,
+      "default_visible": true,
+      "z_index": 3,
+      "canvas": false,
+      "style": {
+        "color": "#1d4ed8",
+        "weight": 1.2,
+        "opacity": 1,
+        "fill": true,
+        "fillColor": "#3b82f6",
+        "fillOpacity": 0.75
+      },
+      "highlight_style": {
+        "color": "#0b2f8a",
+        "weight": 2.5,
+        "opacity": 1
+      },
+      "legend": {
+        "type": "fill",
+        "color": "#1d4ed8",
+        "fillColor": "#3b82f6"
+      },
+      "label_field": "Name",
+      "fields": [
+        {
+          "key": "Name",
+          "label": "Name",
+          "label_hi": "नाम"
+        },
+        {
+          "key": "sub_basin",
+          "label": "Sub-basin",
+          "label_hi": "उप-बेसिन"
+        },
+        {
+          "key": "area_km2",
+          "label": "Area",
+          "label_hi": "क्षेत्रफल",
+          "unit": "km²"
+        },
+        {
+          "key": "area_m2",
+          "label": "Area",
+          "label_hi": "क्षेत्रफल",
+          "unit": "m²"
+        },
+        {
+          "key": "waterType",
+          "label": "Water type",
+          "label_hi": "जल प्रकार"
+        },
+        {
+          "key": "year",
+          "label": "Year",
+          "label_hi": "वर्ष"
+        },
+        {
+          "key": "OBJECTID",
+          "label": "Object ID",
+          "label_hi": "ऑब्जेक्ट आईडी"
+        },
+        {
+          "key": "Remarks",
+          "label": "Remarks",
+          "label_hi": "टिप्पणी"
+        },
+        {
+          "key": "Remark",
+          "label": "Remarks",
+          "label_hi": "टिप्पणी"
+        }
+      ],
+      "absent_values": [
+        "",
+        "<Null>",
+        "0"
+      ],
+      "source": "Narmada_Waterbodies Upper / Middle / Lower (supplied), WGS 84"
+    },
+    {
+      "id": "unnamed_water_bodies",
+      "file": "unnamed_water_bodies.geojson",
+      "name": "Unnamed Water Bodies",
+      "name_hi": "अनाम जल निकाय",
+      "description": "Water bodies with no name recorded in the supplied dataset.",
+      "description_hi": "प्रदत्त डेटासेट में बिना नाम वाले जल निकाय।",
+      "geometry_type": "Polygon",
+      "feature_count": 8161,
+      "default_visible": true,
+      "z_index": 2,
+      "canvas": true,
+      "style": {
+        "color": "#0f766e",
+        "weight": 0.7,
+        "opacity": 0.95,
+        "fill": true,
+        "fillColor": "#5eead4",
+        "fillOpacity": 0.7
+      },
+      "highlight_style": {
+        "color": "#042f2e",
+        "weight": 2,
+        "opacity": 1
+      },
+      "legend": {
+        "type": "fill",
+        "color": "#0f766e",
+        "fillColor": "#5eead4"
+      },
+      "label_field": null,
+      "fields": [
+        {
+          "key": "Name",
+          "label": "Name",
+          "label_hi": "नाम"
+        },
+        {
+          "key": "sub_basin",
+          "label": "Sub-basin",
+          "label_hi": "उप-बेसिन"
+        },
+        {
+          "key": "area_km2",
+          "label": "Area",
+          "label_hi": "क्षेत्रफल",
+          "unit": "km²"
+        },
+        {
+          "key": "area_m2",
+          "label": "Area",
+          "label_hi": "क्षेत्रफल",
+          "unit": "m²"
+        },
+        {
+          "key": "waterType",
+          "label": "Water type",
+          "label_hi": "जल प्रकार"
+        },
+        {
+          "key": "year",
+          "label": "Year",
+          "label_hi": "वर्ष"
+        },
+        {
+          "key": "OBJECTID",
+          "label": "Object ID",
+          "label_hi": "ऑब्जेक्ट आईडी"
+        },
+        {
+          "key": "Remarks",
+          "label": "Remarks",
+          "label_hi": "टिप्पणी"
+        },
+        {
+          "key": "Remark",
+          "label": "Remarks",
+          "label_hi": "टिप्पणी"
+        }
+      ],
+      "absent_values": [
+        "",
+        "<Null>",
+        "0"
+      ],
+      "source": "Narmada_Waterbodies Upper / Middle / Lower (supplied), WGS 84"
+    }
+  ],
+  "coverage": {
+    "water_bodies_total": 8630,
+    "named": 469,
+    "unnamed": 8161,
+    "by_sub_basin": {
+      "Upper": {
+        "named": 193,
+        "unnamed": 3109,
+        "skipped": 0
+      },
+      "Middle": {
+        "named": 200,
+        "unnamed": 2566,
+        "skipped": 0
+      },
+      "Lower": {
+        "named": 76,
+        "unnamed": 2486,
+        "skipped": 0
+      }
+    },
+    "districts": 40
+  },
+  "bounds": [
+    [
+      21.3832055,
+      72.5323562622072
+    ],
+    [
+      23.7803925,
+      81.7717507
+    ]
+  ]
+}

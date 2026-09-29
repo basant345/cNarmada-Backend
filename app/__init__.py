@@ -67,6 +67,11 @@ def create_app():
     from app.routes.river_atlas_routes import river_atlas_bp
     app.register_blueprint(river_atlas_bp)
 
+    # Water Body Atlas and the district boundaries both atlas pages filter
+    # by. Same catalogue-driven contract as the River Atlas above.
+    from app.routes.atlas_routes import atlas_bp
+    app.register_blueprint(atlas_bp)
+
     # Narmada Mitra assistant. Answers from a curated knowledge base with no
     # model and no outbound call, so it adds no meaningful load.
     from app.routes.chatbot_routes import chatbot_bp

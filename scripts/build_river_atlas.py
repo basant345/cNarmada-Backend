@@ -358,6 +358,8 @@ def make_catalog(counts, unnamed_stats, constants):
                 "default_visible": False,
                 "z_index": 2,
                 "canvas": True,
+                # 0.6px hairline: clicks need a wider target than the stroke.
+                "hit_tolerance": 8,
                 "style": {"color": "#000000", "weight": 0.6, "opacity": 0.85},
                 "highlight_style": {"color": "#000000", "weight": 2.5, "opacity": 1},
                 "legend": {"type": "line", "color": "#000000", "weight": 1.5},
