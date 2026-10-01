@@ -1,0 +1,47 @@
+{
+  "_comment": "Citations for the Biodiversity section, transcribed from the project document 'Source for biological Profile'. The document lists one or more sources per theme for the Upper and Middle basin, and marks the Lower basin entries separately; that split is kept here, so each zone and group on the site credits exactly what the document assigns to it. Group keys match the group names in biodiversity.json.",
+  "references": {
+    "mandal_ghosh_2007": "Mandal & Ghosh (2007). Fauna of Madhya Pradesh (including Chhattisgarh). Zoological Survey of India, State Fauna Series 15.",
+    "chandra_2010": "Chandra, Sharma & Ojha (2010). A Compendium on the Faunal Resources of Narmada River Basin in Madhya Pradesh. Records of the Zoological Survey of India, Occasional Paper No. 310.",
+    "wii_2022": "Wildlife Institute of India (2022). Narmada Riverscape: Ecological Status and Trends. Wildlife Institute of India (WII).",
+    "selvaraj_2003": "Selvaraj et al. (2003). Ecology and Fisheries of Selected Reservoirs of Madhya Pradesh (1998-2003). CIFRI Bulletin No. 85.",
+    "singh_2009": "Singh (2009). River Narmada: Its Environment and Fisheries. CIFRI Bulletin No. 157.",
+    "karamchandani_1967": "Karamchandani et al. (1967). Biological Investigations on Fisheries of Narmada River (1958-1966). CIFRI.",
+    "das_2013": "Das et al. (2013). Fishes of River Narmada: A Field Identification Manual. CIFRI Bulletin No. 182.",
+    "hussain_2025": "Hussain, S. A., Badola, R., Maurya, A., Sharma, R., Netam, P., Deorari, D., Kalaimani, A., Hussain, K., Ganguly, A., Kumar, G., Panwar, A., Badoni, P., Bhattarai, R., Ahmed, T., Barthwal, S., Sharma, S. P., Sah, R., Ali, S. Z., & Chaudhary, P. (2025). Assessment of ecological status of Narmada River for conservation planning. Wildlife Institute of India, Dehra Dun, Uttarakhand, India. 315 pp."
+  },
+  "zones": {
+    "upper": {
+      "Amphibians": ["mandal_ghosh_2007", "chandra_2010"],
+      "Birds": ["wii_2022"],
+      "Fish": ["selvaraj_2003", "singh_2009", "karamchandani_1967", "das_2013", "wii_2022"],
+      "Macrobenthos": ["selvaraj_2003", "singh_2009"],
+      "Macrophytes": ["selvaraj_2003", "singh_2009"],
+      "Periphyton": ["selvaraj_2003", "singh_2009"],
+      "Phyto": ["selvaraj_2003", "singh_2009"],
+      "Reptiles": ["mandal_ghosh_2007", "chandra_2010"],
+      "Semi Aquatic": ["wii_2022"],
+      "Zooplankton": ["selvaraj_2003", "singh_2009"]
+    },
+    "middle": {
+      "Amphibians": ["mandal_ghosh_2007", "chandra_2010"],
+      "Birds": ["wii_2022"],
+      "Fish": ["selvaraj_2003", "singh_2009", "karamchandani_1967", "das_2013", "wii_2022"],
+      "Macrobenthos": ["selvaraj_2003", "singh_2009"],
+      "Macrophytes": ["selvaraj_2003", "singh_2009"],
+      "Periphyton": ["selvaraj_2003", "singh_2009"],
+      "Phyto": ["selvaraj_2003", "singh_2009"],
+      "Reptiles": ["mandal_ghosh_2007", "chandra_2010"],
+      "Semi Aquatic": ["wii_2022"],
+      "Zooplankton": ["selvaraj_2003", "singh_2009"]
+    },
+    "lower": {
+      "Fish": ["das_2013"],
+      "Macrophytes": ["singh_2009"],
+      "Macrobenthos": ["singh_2009"],
+      "Reptiles": ["mandal_ghosh_2007", "chandra_2010"],
+      "Semi Aquatic": ["hussain_2025"],
+      "Zooplankton": ["singh_2009"]
+    }
+  }
+}

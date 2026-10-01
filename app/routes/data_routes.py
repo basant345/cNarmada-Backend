@@ -575,7 +575,21 @@ def ground_water():
 # ──────────────────────────────────────────────────────────────────────────
 @data_bp.route("/biodiversity")
 def biodiversity():
-    return jsonify(_read_json("biodiversity.json"))
+    """
+    The tree, plus the citation for every zone and group.
+
+    The species data comes from the Biological Profile workbook; the
+    citations come from biodiversity_sources.json, which carries the
+    project's source list for each theme and keeps the Lower basin's own
+    sources separate from those shared by the Upper and Middle basin. The
+    two are merged here so the page credits each group from one response.
+    """
+    payload = _read_json("biodiversity.json") or {}
+    sources = _read_json("biodiversity_sources.json")
+    if isinstance(payload, dict) and isinstance(sources, dict):
+        payload = dict(payload)
+        payload["sources"] = {k: v for k, v in sources.items() if not k.startswith("_")}
+    return jsonify(payload)
 
 
 # ──────────────────────────────────────────────────────────────────────────
