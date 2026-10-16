@@ -291,25 +291,34 @@ def build_basin():
 
 # ── Catalogue ────────────────────────────────────────────────────────────
 STREAM_FIELDS_NAMED = [
-    {"key": "River_Name", "label": "River name", "label_hi": "नदी का नाम"},
-    {"key": "Basin", "label": "Basin", "label_hi": "बेसिन"},
-    {"key": "River_Code", "label": "River code", "label_hi": "नदी कोड"},
-    {"key": "Length", "label": "Length", "label_hi": "लंबाई", "unit": "km"},
-    {"key": "Shape_Leng", "label": "Mapped length", "label_hi": "मानचित्रित लंबाई", "unit": "m"},
-    {"key": "START_X", "label": "Start longitude", "label_hi": "प्रारंभ देशांतर", "unit": "°E"},
-    {"key": "START_Y", "label": "Start latitude", "label_hi": "प्रारंभ अक्षांश", "unit": "°N"},
-    {"key": "END_X", "label": "End longitude", "label_hi": "अंत देशांतर", "unit": "°E"},
-    {"key": "END_Y", "label": "End latitude", "label_hi": "अंत अक्षांश", "unit": "°N"},
-    {"key": "OBJECTID", "label": "Feature ID", "label_hi": "फ़ीचर आईडी"},
+    {"key": "River_Name", "label": "River name", "label_hi": "नदी का नाम",
+     "label_gu": "નદીનું નામ"},
+    {"key": "Basin", "label": "Basin", "label_hi": "बेसिन", "label_gu": "બેસિન"},
+    {"key": "River_Code", "label": "River code", "label_hi": "नदी कोड", "label_gu": "નદી કોડ"},
+    {"key": "Length", "label": "Length", "label_hi": "लंबाई", "label_gu": "લંબાઈ", "unit": "km"},
+    {"key": "Shape_Leng", "label": "Mapped length", "label_hi": "मानचित्रित लंबाई",
+     "label_gu": "નકશામાં અંકિત લંબાઈ", "unit": "m"},
+    {"key": "START_X", "label": "Start longitude", "label_hi": "प्रारंभ देशांतर",
+     "label_gu": "પ્રારંભ રેખાંશ", "unit": "°E"},
+    {"key": "START_Y", "label": "Start latitude", "label_hi": "प्रारंभ अक्षांश",
+     "label_gu": "પ્રારંભ અક્ષાંશ", "unit": "°N"},
+    {"key": "END_X", "label": "End longitude", "label_hi": "अंत देशांतर",
+     "label_gu": "અંત રેખાંશ", "unit": "°E"},
+    {"key": "END_Y", "label": "End latitude", "label_hi": "अंत अक्षांश",
+     "label_gu": "અંત અક્ષાંશ", "unit": "°N"},
+    {"key": "OBJECTID", "label": "Feature ID", "label_hi": "फ़ीचर आईडी", "label_gu": "ફીચર આઈડી"},
 ]
 
 STREAM_FIELDS_UNNAMED = [
-    {"key": "River_Name", "label": "River name", "label_hi": "नदी का नाम"},
-    {"key": "River_Orde", "label": "Stream order", "label_hi": "धारा क्रम"},
-    {"key": "Length", "label": "Length", "label_hi": "लंबाई", "unit": "m"},
+    {"key": "River_Name", "label": "River name", "label_hi": "नदी का नाम",
+     "label_gu": "નદીનું નામ"},
+    {"key": "River_Orde", "label": "Stream order", "label_hi": "धारा क्रम",
+     "label_gu": "ધારા ક્રમ"},
+    {"key": "Length", "label": "Length", "label_hi": "लंबाई", "label_gu": "લંબાઈ", "unit": "m"},
     {"key": "_overlap_p", "label": "Overlap with named network",
-     "label_hi": "नामित नेटवर्क से अतिव्यापन", "unit": "%"},
-    {"key": "STATUS", "label": "Status", "label_hi": "स्थिति"},
+     "label_hi": "नामित नेटवर्क से अतिव्यापन",
+      "label_gu": "નામિત નેટવર્ક સાથે અતિવ્યાપન", "unit": "%"},
+    {"key": "STATUS", "label": "Status", "label_hi": "स्थिति", "label_gu": "સ્થિતિ"},
 ]
 
 
@@ -319,6 +328,7 @@ def make_catalog(counts, unnamed_stats, constants):
         "generated_on": date.today().isoformat(),
         "title": "Narmada River Atlas",
         "title_hi": "नर्मदा नदी एटलस",
+        "title_gu": "નર્મદા નદી એટલસ",
         "fit_layer": "basin",
         "attribution": "cNARMADA, Indian Institute of Technology Indore",
         "layers": [
@@ -327,8 +337,10 @@ def make_catalog(counts, unnamed_stats, constants):
                 "file": "basin.geojson",
                 "name": "Narmada Basin",
                 "name_hi": "नर्मदा बेसिन",
+                "name_gu": "નર્મદા બેસિન",
                 "description": "Outer boundary of the Narmada river basin.",
                 "description_hi": "नर्मदा नदी बेसिन की बाहरी सीमा।",
+                "description_gu": "નર્મદા નદી બેસિનની બાહ્ય સીમા.",
                 "geometry_type": "Polygon",
                 "feature_count": counts["basin"],
                 "default_visible": True,
@@ -339,8 +351,10 @@ def make_catalog(counts, unnamed_stats, constants):
                 "highlight_style": {"color": "#052e16", "weight": 2.6, "fillOpacity": 0.3},
                 "legend": {"type": "fill", "color": "#14532d", "fillColor": "#ecfdf3"},
                 "label_field": "Name",
-                "fields": [{"key": "Name", "label": "Basin", "label_hi": "बेसिन"},
-                           {"key": "id", "label": "Feature ID", "label_hi": "फ़ीचर आईडी"}],
+                "fields": [{"key": "Name", "label": "Basin", "label_hi": "बेसिन",
+                 "label_gu": "બેસિન"},
+                           {"key": "id", "label": "Feature ID", "label_hi": "फ़ीचर आईडी",
+                            "label_gu": "ફીચર આઈડી"}],
                 "source": "cNARMADA basin boundary dataset",
                 "constants": get_const("basin"),
             },
@@ -349,10 +363,13 @@ def make_catalog(counts, unnamed_stats, constants):
                 "file": "unnamed_streams.geojson",
                 "name": "Unnamed Stream Network",
                 "name_hi": "अनाम धारा नेटवर्क",
+                "name_gu": "અનામી ધારા નેટવર્ક",
                 "description": "Unnamed stream reaches draining the basin, carrying "
                                "Strahler stream order and reach length.",
                 "description_hi": "बेसिन को अपवाहित करने वाली अनाम धाराएँ, जिनमें "
                                   "स्ट्रालर धारा क्रम और लंबाई दर्ज है।",
+                "description_gu": "બેસિનનું નિકાલ કરતી અનામી ધારાઓ, જેમાં સ્ટ્રાલર "
+                                  "ધારા ક્રમ અને ખંડની લંબાઈ નોંધાયેલી છે.",
                 "geometry_type": "LineString",
                 "feature_count": counts["unnamed_streams"],
                 "default_visible": False,
@@ -376,16 +393,23 @@ def make_catalog(counts, unnamed_stats, constants):
                            "स्ट्रालर क्रम {min_stream_order} और उससे ऊपर पर उपलब्ध "
                            "({served_features:,} / {source_features:,} स्रोत खंड)।"
                            .format(**unnamed_stats),
+                "note_gu": "મોટું સ્તર — કેનવાસ રેન્ડરર પર દોરવામાં આવે છે અને મૂળભૂત રીતે બંધ છે. "
+                           "સ્ટ્રાલર ક્રમ {min_stream_order} અને તેથી ઉપર ઉપલબ્ધ "
+                           "({served_features:,} / {source_features:,} સ્રોત ખંડ)."
+                           .format(**unnamed_stats),
             },
             {
                 "id": "named_streams",
                 "file": "named_streams.geojson",
                 "name": "Named Stream Network",
                 "name_hi": "नामित धारा नेटवर्क",
+                "name_gu": "નામિત ધારા નેટવર્ક",
                 "description": "Named tributaries of the Narmada, with river code, "
                                "length and end-point coordinates.",
                 "description_hi": "नर्मदा की नामित सहायक नदियाँ, नदी कोड, लंबाई और "
                                   "छोर के निर्देशांक सहित।",
+                "description_gu": "નર્મદાની નામિત સહાયક નદીઓ, નદી કોડ, લંબાઈ અને "
+                                  "છેડાના કોઓર્ડિનેટ સહિત.",
                 "geometry_type": "LineString",
                 "feature_count": counts["named_streams"],
                 "default_visible": True,
@@ -404,8 +428,10 @@ def make_catalog(counts, unnamed_stats, constants):
                 "file": "centre_line.geojson",
                 "name": "Narmada Centre Line",
                 "name_hi": "नर्मदा केंद्र रेखा",
+                "name_gu": "નર્મદા કેન્દ્રરેખા",
                 "description": "Main stem of the Narmada, Amarkantak to the Gulf of Khambhat.",
                 "description_hi": "नर्मदा की मुख्य धारा, अमरकंटक से खंभात की खाड़ी तक।",
+                "description_gu": "નર્મદાની મુખ્ય ધારા, અમરકંટકથી ખંભાતના અખાત સુધી.",
                 "geometry_type": "LineString",
                 "feature_count": counts["centre_line"],
                 "default_visible": True,

@@ -2,6 +2,7 @@
   "id": "water_bodies",
   "title": "Narmada Water Body Atlas",
   "title_hi": "नर्मदा जल निकाय एटलस",
+  "title_gu": "નર્મદા જળ નિકાય એટલસ",
   "fit_layer": "districts",
   "attribution": "cNARMADA, Indian Institute of Technology Indore",
   "district_layer": "districts",
@@ -13,8 +14,10 @@
       "file": "districts.geojson",
       "name": "District Boundaries",
       "name_hi": "जिला सीमाएँ",
+      "name_gu": "જિલ્લા સીમાઓ",
       "description": "District boundaries of the Narmada basin, as supplied.",
       "description_hi": "नर्मदा बेसिन की जिला सीमाएँ, यथा-प्राप्त।",
+      "description_gu": "નર્મદા બેસિનની જિલ્લા સીમાઓ, જેવી મળી તેવી.",
       "geometry_type": "MultiPolygon",
       "feature_count": 40,
       "default_visible": true,
@@ -43,42 +46,50 @@
         {
           "key": "NAME_2",
           "label": "District",
-          "label_hi": "जिला"
+          "label_hi": "जिला",
+          "label_gu": "જિલ્લા"
         },
         {
           "key": "NAME_1",
           "label": "State",
-          "label_hi": "राज्य"
+          "label_hi": "राज्य",
+          "label_gu": "રાજ્ય"
         },
         {
           "key": "NAME_0",
           "label": "Country",
-          "label_hi": "देश"
+          "label_hi": "देश",
+          "label_gu": "દેશ"
         },
         {
           "key": "TYPE_2",
           "label": "Type",
-          "label_hi": "प्रकार"
+          "label_hi": "प्रकार",
+          "label_gu": "પ્રકાર"
         },
         {
           "key": "ENGTYPE_2",
           "label": "Type (English)",
-          "label_hi": "प्रकार (अंग्रेज़ी)"
+          "label_hi": "प्रकार (अंग्रेज़ी)",
+          "label_gu": "પ્રકાર (અંગ્રેજી)"
         },
         {
           "key": "HASC_2",
           "label": "HASC code",
-          "label_hi": "HASC कोड"
+          "label_hi": "HASC कोड",
+          "label_gu": "HASC કોડ"
         },
         {
           "key": "VARNAME_2",
           "label": "Other names",
-          "label_hi": "अन्य नाम"
+          "label_hi": "अन्य नाम",
+          "label_gu": "અન્ય નામ"
         },
         {
           "key": "ID_2",
           "label": "District ID",
-          "label_hi": "जिला आईडी"
+          "label_hi": "जिला आईडी",
+          "label_gu": "જિલ્લા આઈડી"
         }
       ],
       "absent_values": [
@@ -93,8 +104,10 @@
       "file": "named_water_bodies.geojson",
       "name": "Named Water Bodies",
       "name_hi": "नामित जल निकाय",
+      "name_gu": "નામિત જળ નિકાય",
       "description": "Water bodies that carry a name in the supplied dataset.",
       "description_hi": "प्रदत्त डेटासेट में नाम वाले जल निकाय।",
+      "description_gu": "પ્રદાન કરેલા ડેટાસેટમાં નામ ધરાવતા જળ નિકાય.",
       "geometry_type": "Polygon",
       "feature_count": 469,
       "default_visible": true,
@@ -123,49 +136,58 @@
         {
           "key": "Name",
           "label": "Name",
-          "label_hi": "नाम"
+          "label_hi": "नाम",
+          "label_gu": "નામ"
         },
         {
           "key": "sub_basin",
           "label": "Sub-basin",
-          "label_hi": "उप-बेसिन"
+          "label_hi": "उप-बेसिन",
+          "label_gu": "ઉપ-બેસિન"
         },
         {
           "key": "area_km2",
           "label": "Area",
           "label_hi": "क्षेत्रफल",
+          "label_gu": "ક્ષેત્રફળ",
           "unit": "km²"
         },
         {
           "key": "area_m2",
           "label": "Area",
           "label_hi": "क्षेत्रफल",
+          "label_gu": "ક્ષેત્રફળ",
           "unit": "m²"
         },
         {
           "key": "waterType",
           "label": "Water type",
-          "label_hi": "जल प्रकार"
+          "label_hi": "जल प्रकार",
+          "label_gu": "જળ પ્રકાર"
         },
         {
           "key": "year",
           "label": "Year",
-          "label_hi": "वर्ष"
+          "label_hi": "वर्ष",
+          "label_gu": "વર્ષ"
         },
         {
           "key": "OBJECTID",
           "label": "Object ID",
-          "label_hi": "ऑब्जेक्ट आईडी"
+          "label_hi": "ऑब्जेक्ट आईडी",
+          "label_gu": "ઓબ્જેક્ટ આઈડી"
         },
         {
           "key": "Remarks",
           "label": "Remarks",
-          "label_hi": "टिप्पणी"
+          "label_hi": "टिप्पणी",
+          "label_gu": "ટિપ્પણી"
         },
         {
           "key": "Remark",
           "label": "Remarks",
-          "label_hi": "टिप्पणी"
+          "label_hi": "टिप्पणी",
+          "label_gu": "ટિપ્પણી"
         }
       ],
       "absent_values": [
@@ -180,8 +202,10 @@
       "file": "unnamed_water_bodies.geojson",
       "name": "Unnamed Water Bodies",
       "name_hi": "अनाम जल निकाय",
+      "name_gu": "અનામી જળ નિકાય",
       "description": "Water bodies with no name recorded in the supplied dataset.",
       "description_hi": "प्रदत्त डेटासेट में बिना नाम वाले जल निकाय।",
+      "description_gu": "પ્રદાન કરેલા ડેટાસેટમાં નામ નોંધાયેલું ન હોય તેવા જળ નિકાય.",
       "geometry_type": "Polygon",
       "feature_count": 8161,
       "default_visible": true,
@@ -210,49 +234,58 @@
         {
           "key": "Name",
           "label": "Name",
-          "label_hi": "नाम"
+          "label_hi": "नाम",
+          "label_gu": "નામ"
         },
         {
           "key": "sub_basin",
           "label": "Sub-basin",
-          "label_hi": "उप-बेसिन"
+          "label_hi": "उप-बेसिन",
+          "label_gu": "ઉપ-બેસિન"
         },
         {
           "key": "area_km2",
           "label": "Area",
           "label_hi": "क्षेत्रफल",
+          "label_gu": "ક્ષેત્રફળ",
           "unit": "km²"
         },
         {
           "key": "area_m2",
           "label": "Area",
           "label_hi": "क्षेत्रफल",
+          "label_gu": "ક્ષેત્રફળ",
           "unit": "m²"
         },
         {
           "key": "waterType",
           "label": "Water type",
-          "label_hi": "जल प्रकार"
+          "label_hi": "जल प्रकार",
+          "label_gu": "જળ પ્રકાર"
         },
         {
           "key": "year",
           "label": "Year",
-          "label_hi": "वर्ष"
+          "label_hi": "वर्ष",
+          "label_gu": "વર્ષ"
         },
         {
           "key": "OBJECTID",
           "label": "Object ID",
-          "label_hi": "ऑब्जेक्ट आईडी"
+          "label_hi": "ऑब्जेक्ट आईडी",
+          "label_gu": "ઓબ્જેક્ટ આઈડી"
         },
         {
           "key": "Remarks",
           "label": "Remarks",
-          "label_hi": "टिप्पणी"
+          "label_hi": "टिप्पणी",
+          "label_gu": "ટિપ્પણી"
         },
         {
           "key": "Remark",
           "label": "Remarks",
-          "label_hi": "टिप्पणी"
+          "label_hi": "टिप्पणी",
+          "label_gu": "ટિપ્પણી"
         }
       ],
       "absent_values": [

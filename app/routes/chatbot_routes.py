@@ -6,6 +6,9 @@ Endpoints
   GET  /api/chat/intro          greeting, suggested questions, KB size
   POST /api/chat/ask            {question, lang} -> {answer, links, suggestions}
 
+The knowledge base carries English, Hindi and Gujarati for every entry, and
+`lang` picks which one comes back.
+
 Design
 ------
 Answers come from a curated knowledge base (app/static/data/chatbot/
@@ -41,6 +44,10 @@ KB_FILE = "knowledge.json"
 MIN_SCORE = 0.12
 MAX_QUESTION_CHARS = 500
 
+# Languages the knowledge base is written in. An entry missing one of these
+# falls back to English rather than answering with an empty string.
+LANGS = ("en", "hi", "gu")
+
 # Words carrying no signal on their own. Bare interrogatives are included:
 # they appear in multi-word tags such as "what does this mean", and without
 # this a stray "what" or "who" in an off-topic question would score against
@@ -54,6 +61,8 @@ STOPWORDS = {
     "your", "am", "will", "would", "about",
     "क्या", "है", "हैं", "का", "की", "के", "में", "से", "को", "पर", "और", "यह", "वह",
     "मुझे", "मैं", "कैसे", "कहाँ", "कौन", "बताइए", "बताएं", "हो", "था", "थी",
+    "શું", "છે", "નો", "ની", "નું", "ના", "માં", "થી", "ને", "પર", "અને", "આ", "તે",
+    "મને", "હું", "કેવી", "ક્યાં", "કોણ", "જણાવો", "કહો", "હતું", "હતી", "માટે",
 }
 
 _CACHE = {"mtime": None, "kb": None, "index": None, "idf": None}
@@ -63,9 +72,38 @@ def _kb_path():
     return os.path.join(current_app.config["DATA_DIR"], FOLDER, KB_FILE)
 
 
+# Gujarati fuses its postpositions onto the noun, so "એટલસમાં" and "એટલસ"
+# are the same word to a reader and two different tokens to a scorer. These
+# endings are stripped from Gujarati tokens, in the index and in the question
+# alike, so the pair meets. Hindi needs none of this: there the postposition
+# is a word of its own and the stopword list already removes it.
+GU_SUFFIXES = ("માંથી", "માં", "નું", "નો", "ની", "ના", "ને", "થી", "ઓ", "એ", "ો")
+GU_RANGE = re.compile(r"^[઀-૿]+$")
+
+
+def gu_stem(word):
+    """
+    Drop trailing postpositions and the plural ending from a Gujarati token.
+
+    Two are stripped at most, which covers the plural-plus-postposition forms
+    ("અહેવાલોમાં"), and only while something recognisable is left behind.
+    """
+    if not GU_RANGE.match(word):
+        return word
+    for _ in range(2):
+        for suffix in GU_SUFFIXES:
+            if len(word) > len(suffix) + 2 and word.endswith(suffix):
+                word = word[: -len(suffix)]
+                break
+        else:
+            break
+    return word
+
+
 def tokenize(text):
-    """Lowercase word tokens, Devanagari included, stopwords removed."""
-    words = re.findall(r"[a-z0-9]+|[ऀ-ॿ]+", str(text).lower())
+    """Lowercase word tokens, Devanagari and Gujarati included, stopwords removed."""
+    words = re.findall(r"[a-z0-9]+|[ऀ-ॿ]+|[઀-૿]+", str(text).lower())
+    words = [gu_stem(w) for w in words]
     return [w for w in words if w not in STOPWORDS and len(w) > 1]
 
 
@@ -80,14 +118,15 @@ def _build_index(kb):
     docs = []
     for entry in kb.get("entries", []):
         counts = Counter()
-        for tag in entry.get("tags", []) + entry.get("tags_hi", []):
+        tags = (entry.get("tags", []) + entry.get("tags_hi", [])
+                + entry.get("tags_gu", []))
+        for tag in tags:
             for token in tokenize(tag):
                 counts[token] += 5
-        for lang in ("en", "hi"):
+        for lang in LANGS:
             for token in tokenize(entry.get("answer", {}).get(lang, "")):
                 counts[token] += 1
-        phrases = [t.lower() for t in entry.get("tags", []) + entry.get("tags_hi", [])
-                   if " " in t]
+        phrases = [t.lower() for t in tags if " " in t]
         docs.append({"id": entry["id"], "counts": counts, "phrases": phrases})
 
     n = len(docs) or 1
@@ -148,7 +187,18 @@ def score(question, docs, idf):
 
 
 def pick_lang(value):
-    return "hi" if str(value or "").lower().startswith("hi") else "en"
+    """The requested language, or English when it is one the KB does not carry."""
+    code = str(value or "").lower()
+    for lang in LANGS:
+        if lang != "en" and code.startswith(lang):
+            return lang
+    return "en"
+
+
+def _in_lang(block, lang, empty):
+    """One language out of a {lang: value} block, falling back to English."""
+    block = block or {}
+    return block.get(lang) or block.get("en") or empty
 
 
 @chatbot_bp.route("/intro")
@@ -163,8 +213,9 @@ def intro():
     return jsonify({
         "name": kb.get("name"),
         "name_hi": kb.get("name_hi"),
-        "greeting": kb.get("greeting", {}).get(lang, ""),
-        "suggestions": kb.get("suggestions", {}).get(lang, []),
+        "name_gu": kb.get("name_gu"),
+        "greeting": _in_lang(kb.get("greeting"), lang, ""),
+        "suggestions": _in_lang(kb.get("suggestions"), lang, []),
         "topics": len(kb.get("entries", [])),
         "generated_on": kb.get("generated_on"),
     })
@@ -186,12 +237,12 @@ def ask():
 
     ranked = score(question, docs, idf)
     entries = {e["id"]: e for e in kb.get("entries", [])}
-    suggestions = kb.get("suggestions", {}).get(lang, [])
+    suggestions = _in_lang(kb.get("suggestions"), lang, [])
 
     if not ranked or ranked[0][0] < MIN_SCORE:
         return jsonify({
             "matched": False,
-            "answer": kb.get("fallback", {}).get(lang, ""),
+            "answer": _in_lang(kb.get("fallback"), lang, ""),
             "links": [],
             "related": [],
             "suggestions": suggestions,
@@ -214,7 +265,7 @@ def ask():
         "matched": True,
         "topic": best_id,
         "confidence": round(min(best_score, 1.0), 3),
-        "answer": entry.get("answer", {}).get(lang, ""),
+        "answer": _in_lang(entry.get("answer"), lang, ""),
         "links": entry.get("links", []),
         "related": related,
         "suggestions": suggestions,

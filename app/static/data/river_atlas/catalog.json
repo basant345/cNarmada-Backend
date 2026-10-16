@@ -2,6 +2,7 @@
   "generated_on": "2026-09-19",
   "title": "Narmada River Atlas",
   "title_hi": "नर्मदा नदी एटलस",
+  "title_gu": "નર્મદા નદી એટલસ",
   "fit_layer": "basin",
   "attribution": "cNARMADA, Indian Institute of Technology Indore",
   "layers": [
@@ -10,8 +11,10 @@
       "file": "districts.geojson",
       "name": "District Boundaries",
       "name_hi": "जिला सीमाएँ",
+      "name_gu": "જિલ્લા સીમાઓ",
       "description": "District boundaries of the Narmada basin, as supplied.",
       "description_hi": "नर्मदा बेसिन की जिला सीमाएँ, यथा-प्राप्त।",
+      "description_gu": "નર્મદા બેસિનની જિલ્લા સીમાઓ, જેવી મળી તેવી.",
       "geometry_type": "MultiPolygon",
       "feature_count": 40,
       "default_visible": false,
@@ -40,42 +43,50 @@
         {
           "key": "NAME_2",
           "label": "District",
-          "label_hi": "जिला"
+          "label_hi": "जिला",
+          "label_gu": "જિલ્લા"
         },
         {
           "key": "NAME_1",
           "label": "State",
-          "label_hi": "राज्य"
+          "label_hi": "राज्य",
+          "label_gu": "રાજ્ય"
         },
         {
           "key": "NAME_0",
           "label": "Country",
-          "label_hi": "देश"
+          "label_hi": "देश",
+          "label_gu": "દેશ"
         },
         {
           "key": "TYPE_2",
           "label": "Type",
-          "label_hi": "प्रकार"
+          "label_hi": "प्रकार",
+          "label_gu": "પ્રકાર"
         },
         {
           "key": "ENGTYPE_2",
           "label": "Type (English)",
-          "label_hi": "प्रकार (अंग्रेज़ी)"
+          "label_hi": "प्रकार (अंग्रेज़ी)",
+          "label_gu": "પ્રકાર (અંગ્રેજી)"
         },
         {
           "key": "HASC_2",
           "label": "HASC code",
-          "label_hi": "HASC कोड"
+          "label_hi": "HASC कोड",
+          "label_gu": "HASC કોડ"
         },
         {
           "key": "VARNAME_2",
           "label": "Other names",
-          "label_hi": "अन्य नाम"
+          "label_hi": "अन्य नाम",
+          "label_gu": "અન્ય નામ"
         },
         {
           "key": "ID_2",
           "label": "District ID",
-          "label_hi": "जिला आईडी"
+          "label_hi": "जिला आईडी",
+          "label_gu": "જિલ્લા આઈડી"
         }
       ],
       "absent_values": [
@@ -90,8 +101,10 @@
       "file": "basin.geojson",
       "name": "Narmada Basin",
       "name_hi": "नर्मदा बेसिन",
+      "name_gu": "નર્મદા બેસિન",
       "description": "Outer boundary of the Narmada river basin.",
       "description_hi": "नर्मदा नदी बेसिन की बाहरी सीमा।",
+      "description_gu": "નર્મદા નદી બેસિનની બાહ્ય સીમા.",
       "geometry_type": "Polygon",
       "feature_count": 1,
       "default_visible": true,
@@ -120,12 +133,14 @@
         {
           "key": "Name",
           "label": "Basin",
-          "label_hi": "बेसिन"
+          "label_hi": "बेसिन",
+          "label_gu": "બેસિન"
         },
         {
           "key": "id",
           "label": "Feature ID",
-          "label_hi": "फ़ीचर आईडी"
+          "label_hi": "फ़ीचर आईडी",
+          "label_gu": "ફીચર આઈડી"
         }
       ],
       "source": "cNARMADA basin boundary dataset",
@@ -136,8 +151,10 @@
       "file": "unnamed_streams.geojson",
       "name": "Unnamed Stream Network",
       "name_hi": "अनाम धारा नेटवर्क",
+      "name_gu": "અનામી ધારા નેટવર્ક",
       "description": "Unnamed stream reaches draining the basin, carrying Strahler stream order and reach length.",
       "description_hi": "बेसिन को अपवाहित करने वाली अनाम धाराएँ, जिनमें स्ट्रालर धारा क्रम और लंबाई दर्ज है।",
+      "description_gu": "બેસિનનું નિકાલ કરતી અનામી ધારાઓ, જેમાં સ્ટ્રાલર ધારા ક્રમ અને ખંડની લંબાઈ નોંધાયેલી છે.",
       "geometry_type": "MultiLineString",
       "feature_count": 488755,
       "default_visible": false,
@@ -164,6 +181,7 @@
           "key": "River_Name",
           "label": "River name",
           "label_hi": "नदी का नाम",
+          "label_gu": "નદીનું નામ",
           "absent_values": [
             "0",
             ""
@@ -172,18 +190,21 @@
         {
           "key": "River_Orde",
           "label": "Stream order",
-          "label_hi": "धारा क्रम"
+          "label_hi": "धारा क्रम",
+          "label_gu": "ધારા ક્રમ"
         },
         {
           "key": "Length",
           "label": "Length",
           "label_hi": "लंबाई",
+          "label_gu": "લંબાઈ",
           "unit": "m"
         },
         {
           "key": "_overlap_p",
           "label": "Overlap with named network",
           "label_hi": "नामित नेटवर्क से अतिव्यापन",
+          "label_gu": "નામિત નેટવર્ક સાથે અતિવ્યાપન",
           "unit": "%",
           "absent_values": [
             0
@@ -192,7 +213,8 @@
         {
           "key": "STATUS",
           "label": "Status",
-          "label_hi": "स्थिति"
+          "label_hi": "स्थिति",
+          "label_gu": "સ્થિતિ"
         }
       ],
       "source": "Narmada_Unnamed_Streams.geojson (verified, CRS84), published complete and unmodified",
@@ -207,6 +229,7 @@
       },
       "note": "All 488,755 reaches, original geometry and attributes, unmodified. Order 4+ at every zoom; order 3 from zoom 10; order 0-2 from zoom 12.",
       "note_hi": "सभी 488,755 खंड, मूल ज्यामिति और गुण, बिना किसी बदलाव के। क्रम 4+ हर ज़ूम पर; छोटे क्रम ज़ूम इन करने पर।",
+      "note_gu": "બધા 488,755 ખંડ, મૂળ ભૂમિતિ અને ગુણધર્મો, કોઈ ફેરફાર વિના. ક્રમ 4+ દરેક ઝૂમ પર; નાના ક્રમ ઝૂમ ઇન કરવા પર.",
       "tiles": {
         "scheme": "xyz",
         "url": "/api/river-atlas/layer/unnamed_streams/tile/{band}/{z}/{x}/{y}",
@@ -2257,8 +2280,10 @@
       "file": "named_streams.geojson",
       "name": "Named Stream Network",
       "name_hi": "नामित धारा नेटवर्क",
+      "name_gu": "નામિત ધારા નેટવર્ક",
       "description": "Named tributaries of the Narmada, with river code, length and end-point coordinates.",
       "description_hi": "नर्मदा की नामित सहायक नदियाँ, नदी कोड, लंबाई और छोर के निर्देशांक सहित।",
+      "description_gu": "નર્મદાની નામિત સહાયક નદીઓ, નદી કોડ, લંબાઈ અને છેડાના કોઓર્ડિનેટ સહિત.",
       "geometry_type": "LineString",
       "feature_count": 1040,
       "default_visible": true,
@@ -2284,58 +2309,68 @@
         {
           "key": "River_Name",
           "label": "River name",
-          "label_hi": "नदी का नाम"
+          "label_hi": "नदी का नाम",
+          "label_gu": "નદીનું નામ"
         },
         {
           "key": "Basin",
           "label": "Basin",
-          "label_hi": "बेसिन"
+          "label_hi": "बेसिन",
+          "label_gu": "બેસિન"
         },
         {
           "key": "River_Code",
           "label": "River code",
-          "label_hi": "नदी कोड"
+          "label_hi": "नदी कोड",
+          "label_gu": "નદી કોડ"
         },
         {
           "key": "Length",
           "label": "Length",
           "label_hi": "लंबाई",
+          "label_gu": "લંબાઈ",
           "unit": "km"
         },
         {
           "key": "Shape_Leng",
           "label": "Mapped length",
           "label_hi": "मानचित्रित लंबाई",
+          "label_gu": "નકશામાં અંકિત લંબાઈ",
           "unit": "m"
         },
         {
           "key": "START_X",
           "label": "Start longitude",
           "label_hi": "प्रारंभ देशांतर",
+          "label_gu": "પ્રારંભ રેખાંશ",
           "unit": "°E"
         },
         {
           "key": "START_Y",
           "label": "Start latitude",
           "label_hi": "प्रारंभ अक्षांश",
+          "label_gu": "પ્રારંભ અક્ષાંશ",
           "unit": "°N"
         },
         {
           "key": "END_X",
           "label": "End longitude",
           "label_hi": "अंत देशांतर",
+          "label_gu": "અંત રેખાંશ",
           "unit": "°E"
         },
         {
           "key": "END_Y",
           "label": "End latitude",
           "label_hi": "अंत अक्षांश",
+          "label_gu": "અંત અક્ષાંશ",
           "unit": "°N"
         },
         {
           "key": "OBJECTID",
           "label": "Feature ID",
-          "label_hi": "फ़ीचर आईडी"
+          "label_hi": "फ़ीचर आईडी",
+          "label_gu": "ફીચર આઈડી"
         }
       ],
       "source": "NARMADA_NAMED_NETWORK (reprojected from UTM zone 43N)",
@@ -2348,8 +2383,10 @@
       "file": "centre_line.geojson",
       "name": "Narmada Centre Line",
       "name_hi": "नर्मदा केंद्र रेखा",
+      "name_gu": "નર્મદા કેન્દ્રરેખા",
       "description": "Main stem of the Narmada, Amarkantak to the Gulf of Khambhat.",
       "description_hi": "नर्मदा की मुख्य धारा, अमरकंटक से खंभात की खाड़ी तक।",
+      "description_gu": "નર્મદાની મુખ્ય ધારા, અમરકંટકથી ખંભાતના અખાત સુધી.",
       "geometry_type": "LineString",
       "feature_count": 1,
       "default_visible": true,
@@ -2377,58 +2414,68 @@
         {
           "key": "River_Name",
           "label": "River name",
-          "label_hi": "नदी का नाम"
+          "label_hi": "नदी का नाम",
+          "label_gu": "નદીનું નામ"
         },
         {
           "key": "Basin",
           "label": "Basin",
-          "label_hi": "बेसिन"
+          "label_hi": "बेसिन",
+          "label_gu": "બેસિન"
         },
         {
           "key": "River_Code",
           "label": "River code",
-          "label_hi": "नदी कोड"
+          "label_hi": "नदी कोड",
+          "label_gu": "નદી કોડ"
         },
         {
           "key": "Length",
           "label": "Length",
           "label_hi": "लंबाई",
+          "label_gu": "લંબાઈ",
           "unit": "km"
         },
         {
           "key": "Shape_Leng",
           "label": "Mapped length",
           "label_hi": "मानचित्रित लंबाई",
+          "label_gu": "નકશામાં અંકિત લંબાઈ",
           "unit": "m"
         },
         {
           "key": "START_X",
           "label": "Start longitude",
           "label_hi": "प्रारंभ देशांतर",
+          "label_gu": "પ્રારંભ રેખાંશ",
           "unit": "°E"
         },
         {
           "key": "START_Y",
           "label": "Start latitude",
           "label_hi": "प्रारंभ अक्षांश",
+          "label_gu": "પ્રારંભ અક્ષાંશ",
           "unit": "°N"
         },
         {
           "key": "END_X",
           "label": "End longitude",
           "label_hi": "अंत देशांतर",
+          "label_gu": "અંત રેખાંશ",
           "unit": "°E"
         },
         {
           "key": "END_Y",
           "label": "End latitude",
           "label_hi": "अंत अक्षांश",
+          "label_gu": "અંત અક્ષાંશ",
           "unit": "°N"
         },
         {
           "key": "OBJECTID",
           "label": "Feature ID",
-          "label_hi": "फ़ीचर आईडी"
+          "label_hi": "फ़ीचर आईडी",
+          "label_gu": "ફીચર આઈડી"
         }
       ],
       "source": "NARMADA_NAMED_NETWORK (reprojected from UTM zone 43N)",

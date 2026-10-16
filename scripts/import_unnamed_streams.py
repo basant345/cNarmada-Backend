@@ -293,10 +293,12 @@ def main():
     if entry.get("raster"):
         entry.pop("zoom_hint", None)
         entry.pop("zoom_hint_hi", None)
+        entry.pop("zoom_hint_gu", None)
     else:
         first = min(b["min_zoom"] for b in BANDS)
         entry["zoom_hint"] = f"Zoom in to see smaller streams (from zoom {first})."
         entry["zoom_hint_hi"] = f"छोटी धाराएँ देखने के लिए ज़ूम इन करें (ज़ूम {first} से)।"
+        entry["zoom_hint_gu"] = f"નાની ધારાઓ જોવા માટે ઝૂમ ઇન કરો (ઝૂમ {first} થી)."
     def orders_label(orders):
         return str(orders[0]) if len(orders) == 1 else f"{orders[0]}-{orders[-1]}"
 
@@ -309,6 +311,10 @@ def main():
     entry["note_hi"] = (
         f"सभी {total_published:,} खंड, मूल ज्यामिति और गुण, बिना किसी बदलाव के। "
         f"क्रम {OVERVIEW_MIN_ORDER}+ हर ज़ूम पर; छोटे क्रम ज़ूम इन करने पर।"
+    )
+    entry["note_gu"] = (
+        f"બધા {total_published:,} ખંડ, મૂળ ભૂમિતિ અને ગુણધર્મો, કોઈ ફેરફાર વિના. "
+        f"ક્રમ {OVERVIEW_MIN_ORDER}+ દરેક ઝૂમ પર; નાના ક્રમ ઝૂમ ઇન કરવા પર."
     )
 
     with open(cat_path, "w", encoding="utf-8", newline="\n") as fh:
