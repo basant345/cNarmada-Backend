@@ -41,6 +41,29 @@ def whoami():
     return jsonify({"email": current_user()["email"], "name": current_user()["name"]})
 
 
+@export_bp.route("/water-history")
+@require_iiti_user
+def export_water_history():
+    """
+    Monthly water area per water body, 2018-2026, measured from Sentinel-2.
+
+    The same figures the Water Body Atlas charts publicly. Viewing is open to
+    anyone; pulling the dataset out as a file is not, which is the split every
+    other endpoint in this module keeps.
+
+    Sent straight off disk rather than read and re-serialised. The file is
+    about 8 MB, and parsing it into Python objects only to print it back out
+    would cost far more memory than the hosting tier has to spare.
+    """
+    path = _data_path("water_atlas", "water_history.json")
+    if not os.path.exists(path):
+        abort(404, description="water_atlas/water_history.json not found")
+    return send_from_directory(
+        _data_path("water_atlas"), "water_history.json",
+        mimetype="application/json",
+    )
+
+
 @export_bp.route("/water-quality-10yr")
 @require_iiti_user
 def export_water_quality_10yr():

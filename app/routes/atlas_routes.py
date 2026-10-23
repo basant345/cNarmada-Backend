@@ -9,6 +9,8 @@ Endpoints
   GET /api/atlas/water/layer/<id>    one of those layers as GeoJSON
   GET /api/atlas/districts           the district boundaries on their own,
                                      shared by both atlas pages
+  GET /api/atlas/water/history       monthly water area per water body,
+                                     2018-2026, measured from Sentinel-2
 
 The catalogue is the contract, exactly as it is for the River Atlas: the
 page draws whatever the catalogue lists (style, draw order, popup field
@@ -174,6 +176,58 @@ def layer(atlas_id, layer_id):
     if not os.path.exists(path):
         return jsonify({"error": f"Layer file missing on the server: {entry['file']}"}), 404
     return _serve_geojson(path)
+
+
+HISTORY_FILE = "water_history.json"
+
+
+def _serve_json(path):
+    """Send the pre-compressed twin when the client takes gzip, else the file."""
+    gz_path = path + ".gz"
+    accepts_gzip = "gzip" in request.headers.get("Accept-Encoding", "").lower()
+    use_gzip = accepts_gzip and os.path.exists(gz_path) and _gzip_matches(gz_path, path)
+
+    if use_gzip:
+        with open(gz_path, "rb") as fh:
+            body = fh.read()
+        response = Response(body, mimetype="application/json")
+        response.headers["Content-Encoding"] = "gzip"
+        response.headers["Content-Length"] = str(len(body))
+    else:
+        response = send_file(path, mimetype="application/json", conditional=True)
+
+    response.headers["Vary"] = "Accept-Encoding"
+    response.headers["Cache-Control"] = "public, max-age=86400"
+    return response
+
+
+@atlas_bp.route("/water/history")
+def water_history():
+    """
+    Monthly water area inside every published water body polygon, 2018-2026.
+
+    Measured from Sentinel-2 surface reflectance with an MNDWI threshold and
+    an SCL cloud mask, at 20 m. Each water body carries two arrays of 108
+    values, January 2018 through December 2026 in order: `a` is water area in
+    square metres, `v` is the percent of the polygon seen through cloud.
+
+    A month whose `v` falls below `min_valid_percent` was not observed. The
+    page must draw those as gaps. Rendering them as zero would turn a clouded
+    monsoon month into a water body that appears to have dried up.
+
+    The whole file is served in one request, pre-compressed, because the page
+    needs arbitrary periods and arbitrary water bodies the moment the user
+    starts clicking, and a round trip per click is worse than one download.
+    """
+    path = os.path.join(_dir(DISTRICT_ATLAS), HISTORY_FILE)
+    if not os.path.exists(path):
+        return jsonify({
+            "error": "Water body history has not been built on this server.",
+            "hint": "Run scripts/build_water_history.py with the Earth Engine "
+                    "CSV exports to generate "
+                    "app/static/data/water_atlas/water_history.json.",
+        }), 404
+    return _serve_json(path)
 
 
 @atlas_bp.route("/districts")
